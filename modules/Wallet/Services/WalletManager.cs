@@ -13,7 +13,7 @@ namespace Wallet.Services
 
         Task CreateNewWallet(string password);
 
-        Task<bool> UnlockWallet(string password, bool bypass = false);
+        Task<bool> UnlockWalletAsync(string password, bool bypass = false);
 
         Task<bool> RestoreWallet(string seedWords, string password);
     }
@@ -44,7 +44,7 @@ namespace Wallet.Services
             });
         }
 
-        public Task<bool> UnlockWallet(string password, bool bypass = false)
+        public Task<bool> UnlockWalletAsync(string password, bool bypass = false)
         {
             return Task.Run(delegate
             {

@@ -34,6 +34,7 @@ namespace Wallet.Forms.Bootstraps.Modules
             containerRegistry.RegisterForNavigation<PassphraseView, PassphraseViewModel>();
             containerRegistry.RegisterForNavigation<PassphraseConfirmationView, PasscodeConfirmationViewModel>();
             containerRegistry.RegisterForNavigation<WalletView, WalletViewModel>();
+            containerRegistry.RegisterForNavigation<RecoverView, RecoverViewModel>();
         }
 
         class WalletNavigationService : INavigationService
@@ -50,16 +51,27 @@ namespace Wallet.Forms.Bootstraps.Modules
                 Uri uri = null;
 
                 switch (key)
-                {   
+                {
+                    case Wallet.NavigationKeys.UnlockWallet:
+                        uri = Routes.Home;
+                        break;
                     case Wallet.NavigationKeys.CreateWallet:
+                        uri = Routes.WalletPasscode;
                         break;
                     case Wallet.NavigationKeys.ConfirmPasscode:
+                        uri = Routes.WalletPasscodeConfirmation;
                         break;
                     case Wallet.NavigationKeys.ConnfirmPasscodeOk:
+                        uri = Routes.WalletPassphrase;
                         break;
                     case Wallet.NavigationKeys.ConfirmaPassphrase:
+                        uri = Routes.WalletPasscodeConfirmation;
                         break;
                     case Wallet.NavigationKeys.ConfirmaPassphraseOk:
+                        uri = Routes.Wallet;
+                        break;
+                    case Wallet.NavigationKeys.RecoverWallet:
+                        uri = Routes.WalletRecover;
                         break;
 
                     default:

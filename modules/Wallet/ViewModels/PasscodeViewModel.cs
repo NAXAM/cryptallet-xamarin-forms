@@ -11,5 +11,12 @@ namespace Wallet.ViewModels
         {
             this.controller = controller;
         }
+
+        public override void Load(object data)
+        {
+            base.Load(data);
+
+
+        }
     }
 }

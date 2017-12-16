@@ -6,6 +6,9 @@ using Xamarin.Forms;
 using System;
 using Plugin.SecureStorage;
 using Prism.Ioc;
+using Prism.Navigation;
+using Wallet.Forms.Bootstraps.Services;
+using DryIoc;
 
 namespace Wallet.Forms.Bootstraps
 {
@@ -17,14 +20,23 @@ namespace Wallet.Forms.Bootstraps
 
         protected async override void OnInitialized()
         {
-            Initialize();
+            InitializeComponent();
 
-            await NavigationService.NavigateAsync(Routes.Home);
+            //NavigationService = Container.Resolve<INavigationService>();
+
+            await NavigationService.NavigateAsync(Routes.Default);
         }
 
         protected override void RegisterTypes(Prism.Ioc.IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterInstance(CrossSecureStorage.Current);
+
+            Container.GetContainer().Register<INavigationService, CustomNavigationService>(
+                serviceKey: NavigationServiceName,
+                ifAlreadyRegistered: IfAlreadyRegistered.Replace
+            );
+
+            containerRegistry.RegisterForNavigation<NavigationPage>();
         }
 
         protected override void ConfigureModuleCatalog(Prism.Modularity.IModuleCatalog moduleCatalog)
@@ -35,11 +47,22 @@ namespace Wallet.Forms.Bootstraps
         }
     }
 
-    public static class Routes
+    public static partial class Routes
     {
         static readonly string appScheme = "cryptallet";
+        static readonly string navigation = nameof(NavigationPage);
 
-        public static readonly Uri Home = new Uri($"{appScheme}:///{nameof(UnlockView)}");
+        public static readonly Uri Home = new Uri($"{appScheme}:///{navigation}/{nameof(WalletView)}", UriKind.Absolute);
+        public static readonly Uri Default = new Uri($"{appScheme}:///{navigation}/{nameof(UnlockView)}", UriKind.Absolute);
     }
 
+    partial class Routes
+    {
+        public static readonly Uri WalletPasscode = new Uri($"{nameof(PasscodeView)}", UriKind.Relative);
+        public static readonly Uri WalletPasscodeConfirmation = new Uri($"{nameof(PasscodeConfirmationView)}", UriKind.Relative);
+        public static readonly Uri WalletPassphrase = new Uri($"{nameof(PassphraseView)}", UriKind.Relative);
+        public static readonly Uri WalletPassphraseConfirmation = new Uri($"{nameof(PassphraseConfirmationView)}", UriKind.Relative);
+        public static readonly Uri Wallet = new Uri($"{nameof(WalletView)}", UriKind.Relative);
+        public static readonly Uri WalletRecover = new Uri($"{nameof(RecoverView)}", UriKind.Relative);
+    }
 }

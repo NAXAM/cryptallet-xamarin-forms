@@ -3,6 +3,7 @@ namespace Wallet
 {
     public static class NavigationKeys
     {
+        public const string UnlockWallet = "__wallet__UNLOCK__UNLOCK_WALLET";
         public const string CreateWallet = "__wallet__UNLOCK__CREATE_WALLET";
         public const string RecoverWallet = "__wallet__UNLOCK__RECOVER_WALLET";
         public const string ConfirmPasscode = "__wallet__PASSCODE_CONFIRMATION";
