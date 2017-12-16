@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="White"
+	x:Class="Wallet.Views.UnlockView">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout
+            VerticalOptions="Center"
+            Spacing="0"
+            >
+            <Label 
+                Text="Cryptallet"
+                FontSize="36"
+                TextColor="#3574FA"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="End"
+                />
+            <Label 
+                Text="wallet for your cryptos"
+                FontSize="36"
+                TextColor="#B2B2B2"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Start"
+                />
+        </StackLayout>
+    </Grid>
+</ContentPage>

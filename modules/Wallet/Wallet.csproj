@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.121934" />
+    <PackageReference Include="Nethereum.StandardTokenEIP20" Version="2.2.0" />
+    <PackageReference Include="Nethereum.HdWallet" Version="2.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Core\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Models\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+</Project>

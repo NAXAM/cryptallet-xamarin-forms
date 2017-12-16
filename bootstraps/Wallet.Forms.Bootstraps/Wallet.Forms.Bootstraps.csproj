@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.121934" />
+    <PackageReference Include="Prism.Autofac.Forms" Version="7.0.0.336-pre" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\modules\Wallet\Wallet.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\" />
+  </ItemGroup>
+</Project>
