@@ -1,33 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage
-	xmlns="http://xamarin.com/schemas/2014/forms"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     BackgroundColor="White"
-	x:Class="Wallet.Views.UnlockView">
-    <Grid>
+    x:Class="Wallet.Views.UnlockView">
+    <Grid
+        RowSpacing="0"
+        ColumnSpacing="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="*" />
+            <ColumnDefinition
+                Width="240" />
+            <ColumnDefinition
+                Width="*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition
+                Height="*" />
+            <RowDefinition
+                Height="*" />
         </Grid.RowDefinitions>
-
         <StackLayout
+            Grid.Column="1"
             VerticalOptions="Center"
-            Spacing="0"
-            >
-            <Label 
+            Spacing="0">
+            <Label
                 Text="Cryptallet"
                 FontSize="36"
-                TextColor="#3574FA"
+                TextColor="{StaticResource ColorPrimary}"
                 HorizontalTextAlignment="Center"
-                VerticalTextAlignment="End"
-                />
-            <Label 
+                VerticalTextAlignment="End" />
+            <Label
                 Text="wallet for your cryptos"
-                FontSize="36"
-                TextColor="#B2B2B2"
+                FontSize="16"
+                TextColor="{StaticResource ColorTextSecondary}"
                 HorizontalTextAlignment="Center"
-                VerticalTextAlignment="Start"
-                />
+                VerticalTextAlignment="Start" />
         </StackLayout>
+        <Grid
+            Grid.Column="1"
+            Grid.Row="1"
+            ColumnSpacing="0"
+            RowSpacing="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="48" />
+                <RowDefinition
+                    Height="48" />
+                <RowDefinition
+                    Height="48" />
+                <RowDefinition
+                    Height="*" />
+            </Grid.RowDefinitions>
+            <Entry
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Placeholder="Enter your passcode" />
+            <ContentView
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Grid.Row="1"
+                Padding="0, 8"
+                VerticalOptions="Start"
+                HorizontalOptions="End">
+                <Label
+                    Text="Forgot Passcode?"
+                    TextColor="{StaticResource ColorPrimary}"
+                    FontSize="{StaticResource FontSizeSmall}"
+                    HorizontalTextAlignment="End" />
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding RecoverCommand}" />
+                </ContentView.GestureRecognizers>
+            </ContentView>
+            <StackLayout
+                Spacing="0"
+                Grid.Column="0"
+                Grid.Row="2">
+                <Label
+                    Text="No Wallet?"
+                    TextColor="{StaticResource ColorTextSecondary}"
+                    FontSize="{StaticResource FontSizeSmall}" />
+                <ContentView
+                    Padding="0, 8"
+                    VerticalOptions="End">
+                    <Label
+                        Text="Create Wallet"
+                        TextColor="{StaticResource ColorPrimary}"
+                        FontSize="{StaticResource FontSizeSmall}" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding CreateCommand}" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+            </StackLayout>
+            <ContentView
+                Grid.Column="1"
+                Grid.Row="2"
+                Padding="16"
+                BackgroundColor="{StaticResource ColorPrimary}">
+                <Label
+                    Text="UNLOCK"
+                    TextColor="{StaticResource ColorTextPrimary}"
+                    FontSize="{StaticResource FontSizeNormal}"
+                    HorizontalTextAlignment="Center" />
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding UnlockCommand}" />
+                </ContentView.GestureRecognizers>
+            </ContentView>
+        </Grid>
     </Grid>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color
+                x:Key="ColorPrimary">#3574FA</Color>
+            <Color
+                x:Key="ColorTextPrimary">#FFFFFF</Color>
+            <Color
+                x:Key="ColorTextSecondary">#B2B2B2</Color>
+            <x:Double
+                x:Key="FontSizeNormal">16</x:Double>
+            <x:Double
+                x:Key="FontSizeSmall">14</x:Double>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 </ContentPage>

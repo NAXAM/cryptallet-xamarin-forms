@@ -6,7 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.121934" />
-    <PackageReference Include="Prism.Autofac.Forms" Version="7.0.0.336-pre" />
+    <PackageReference Include="sameerIOTApps.Plugin.SecureStorage" Version="1.2.2" />
+    <PackageReference Include="Prism.DryIoc.Forms" Version="7.0.0.336-pre" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\modules\Wallet\Wallet.csproj" />

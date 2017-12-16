@@ -1,9 +1,11 @@
-﻿using Prism.Autofac;
+﻿using Prism.DryIoc;
 using Prism;
 using Wallet.Views;
 using Wallet.Forms.Bootstraps.Modules;
 using Xamarin.Forms;
 using System;
+using Plugin.SecureStorage;
+using Prism.Ioc;
 
 namespace Wallet.Forms.Bootstraps
 {
@@ -11,7 +13,6 @@ namespace Wallet.Forms.Bootstraps
     {
         public WalletApplication(IPlatformInitializer platformInitializer = null) : base(platformInitializer)
         {
-            //MainPage = new ContentPage();
         }
 
         protected async override void OnInitialized()
@@ -23,7 +24,14 @@ namespace Wallet.Forms.Bootstraps
 
         protected override void RegisterTypes(Prism.Ioc.IContainerRegistry containerRegistry)
         {
-            new WalletModule().RegisterTypes(containerRegistry);
+            containerRegistry.RegisterInstance(CrossSecureStorage.Current);
+        }
+
+        protected override void ConfigureModuleCatalog(Prism.Modularity.IModuleCatalog moduleCatalog)
+        {
+            base.ConfigureModuleCatalog(moduleCatalog);
+
+            moduleCatalog.AddModule(new Prism.Modularity.ModuleInfo(typeof(WalletModule)));
         }
     }
 
