@@ -23,8 +23,10 @@ namespace Wallet.Forms.Bootstraps.Modules
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IAccountsManager, AccountsManager>();
-            containerRegistry.RegisterSingleton<NewWalletController>();
             containerRegistry.RegisterSingleton<IWalletManager, WalletManager>();
+
+            containerRegistry.RegisterSingleton<NewWalletController>();
+            containerRegistry.RegisterSingleton<RecoverWalletController>();
 
             containerRegistry.Register<INavigationService, WalletNavigationService>();
 
@@ -53,6 +55,7 @@ namespace Wallet.Forms.Bootstraps.Modules
                 switch (key)
                 {
                     case Wallet.NavigationKeys.UnlockWallet:
+                    case Wallet.NavigationKeys.RecoverWalletOk:
                         uri = Routes.Home;
                         break;
                     case Wallet.NavigationKeys.CreateWallet:

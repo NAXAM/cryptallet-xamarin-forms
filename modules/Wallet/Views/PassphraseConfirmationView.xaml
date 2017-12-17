@@ -3,7 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Wallet.Views.PassphraseConfirmationView"
-    Title="Create wallet - Step 4"
+    Title="Create Wallet - Step 4"
     BackgroundColor="White">
     <ContentPage.Resources>
         <ResourceDictionary>

@@ -10,11 +10,11 @@
         ColumnSpacing="0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition
-                Width="*" />
-            <ColumnDefinition
-                Width="280" />
+                Width="24" />
             <ColumnDefinition
                 Width="*" />
+            <ColumnDefinition
+                Width="24" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition
@@ -66,7 +66,7 @@
                 Keyboard="Numeric"
                 Text="{Binding Passcode}"
                 IsPassword="true"
-                Placeholder="Enter your passcode" />
+                Placeholder="Enter your PIN" />
             <ContentView
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
@@ -75,7 +75,7 @@
                 VerticalOptions="Start"
                 HorizontalOptions="End">
                 <Label
-                    Text="Forgot Passcode?"
+                    Text="Forgot PIN?"
                     TextColor="{StaticResource ColorPrimary}"
                     FontSize="{StaticResource FontSizeSmall}"
                     HorizontalTextAlignment="End" />
