@@ -11,7 +11,7 @@ namespace Wallet.Services
     {
         Wallet Wallet { get; }
 
-        Task CreateNewWallet(string password);
+        Task CreateWalletAsync(string password);
 
         Task<bool> UnlockWalletAsync(string password, bool bypass = false);
 
@@ -34,7 +34,7 @@ namespace Wallet.Services
             this.secureStorgage = secureStorgage;
         }
 
-        public Task CreateNewWallet(string password)
+        public Task CreateWalletAsync(string password)
         {
             return Task.Run(delegate
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Linq;
 
 namespace Wallet.Controls
 {
@@ -62,7 +63,7 @@ namespace Wallet.Controls
 
                     if (codes.Count == 6)
                     {
-                        Command?.Execute(string.Join(string.Empty, codes));
+                        Command?.Execute(string.Join(string.Empty, codes.Reverse()));
                     }
                 }
 

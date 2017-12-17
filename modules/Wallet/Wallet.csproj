@@ -9,6 +9,7 @@
     <PackageReference Include="Nethereum.StandardTokenEIP20" Version="2.2.0" />
     <PackageReference Include="Nethereum.HdWallet" Version="2.2.0" />
     <PackageReference Include="sameerIOTApps.Plugin.SecureStorage" Version="1.2.2" />
+    <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.3.2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
@@ -17,6 +18,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Models\" />
     <Folder Include="Services\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\controls\Wallet.Controls\Wallet.Controls.csproj" />

@@ -14,7 +14,7 @@ namespace Wallet.Services
 
         public async Task CreateWallet()
         {
-            await walletManager.CreateNewWallet(passcode);
+            await walletManager.CreateWalletAsync(passcode);
         }
 
         public string[] GetSeedWords()

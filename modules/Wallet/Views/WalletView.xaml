@@ -1,9 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage
-	xmlns="http://xamarin.com/schemas/2014/forms"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Wallet"
-	x:Class="Wallet.Views.WalletView">
-	<ContentPage.Content>
-	</ContentPage.Content>
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:Wallet.Converters;"
+    xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms;"
+    xmlns:zxingCommon="clr-namespace:ZXing.Common;assembly=zxing.portable"
+    Title="Cryptallet"
+    x:Class="Wallet.Views.WalletView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:NXTtoUSDConverter
+                x:Key="NXTtoUSDConverter" />
+            <Color
+                x:Key="ColorPrimary">#3574FA</Color>
+            <Color
+                x:Key="ColorTextPrimary">#FFFFFF</Color>
+            <Color
+                x:Key="ColorTextAccent">#384951</Color>
+            <Color
+                x:Key="ColorTextSecondary">#B2B2B2</Color>
+            <x:Double
+                x:Key="FontSizeNormal">16</x:Double>
+            <x:Double
+                x:Key="FontSizeXlarge">26</x:Double>
+            <x:Double
+                x:Key="FontSizeSmall">14</x:Double>
+            <x:Double
+                x:Key="FontSizeXsmall">12</x:Double>
+            <OnPlatform
+                x:Key="EntryRowHeight"
+                x:TypeArguments="GridLength"
+                Android="56"
+                iOS="48">
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid
+        RowSpacing="0"
+        ColumnSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="2*" />
+            <RowDefinition
+                Height="3*" />
+        </Grid.RowDefinitions>
+        <Grid
+            Margin="24,48"
+            Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="144" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="144" />
+            </Grid.ColumnDefinitions>
+            <zxing:ZXingBarcodeImageView
+                BarcodeFormat="QR_CODE"
+                BarcodeValue="{Binding DefaultAccountAddress}">
+                <zxing:ZXingBarcodeImageView.BarcodeOptions>
+                    <zxingCommon:EncodingOptions
+                        PureBarcode="False"
+                        Margin="0"
+                        Height="112"
+                        Width="112" />
+                </zxing:ZXingBarcodeImageView.BarcodeOptions>
+            </zxing:ZXingBarcodeImageView>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="96" />
+            </Grid.RowDefinitions>
+            <Label
+                Margin="24,24,24,0"
+                Text="{Binding DefaultAccountAddress}"
+                TextColor="{StaticResource ColorTextAccent}"
+                FontSize="{StaticResource FontSizeXsmall}"
+                HorizontalTextAlignment="End" />
+            <Label
+                Margin="24,40,24,0"
+                Text="{Binding Balance, StringFormat='{0:#,##0.00} NXT'}"
+                TextColor="{StaticResource ColorPrimary}"
+                FontSize="{StaticResource FontSizeXlarge}"
+                HorizontalTextAlignment="End" />
+            <Label
+                Margin="24,0"
+                Text="{Binding Balance, Converter={StaticResource NXTtoUSDConverter}}"
+                TextColor="{StaticResource ColorTextAccent}"
+                FontSize="{StaticResource FontSizeSmall}"
+                HorizontalTextAlignment="End"
+                VerticalOptions="End" />
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            Padding="24, 48"
+            RowSpacing="8"
+            BackgroundColor="#FAFAFA">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="{StaticResource EntryRowHeight}" />
+                <RowDefinition
+                    Height="{StaticResource EntryRowHeight}" />
+                <RowDefinition
+                    Height="{StaticResource EntryRowHeight}" />
+                <RowDefinition
+                    Height="{StaticResource EntryRowHeight}" />
+            </Grid.RowDefinitions>
+            <Label
+                Text="Send some NXT"
+                TextColor="{StaticResource ColorTextAccent}"
+                FontSize="{StaticResource FontSizeXlarge}" />
+            <Entry
+                Grid.Row="1"
+                Text="{Binding RecipientAddress}"
+                IsPassword="true"
+                Placeholder="Enter your friend's Ethereum address" />
+            <Entry
+                Grid.Row="2"
+                Text="{Binding SendingAmount}"
+                Keyboard="Numeric"
+                Placeholder="Enter amout to send" />
+            <Label
+                Grid.Row="3"
+                VerticalTextAlignment="Start"
+                Text="{Binding SendingAmount, Converter={StaticResource NXTtoUSDConverter}}"
+                TextColor="{StaticResource ColorTextAccent}"
+                FontSize="{StaticResource FontSizeNormal}" />
+        </Grid>
+        <ContentView
+            Grid.Row="1"
+            Padding="16"
+            VerticalOptions="End"
+            BackgroundColor="{StaticResource ColorPrimary}">
+            <Label
+                Text="SEND"
+                TextColor="{StaticResource ColorTextPrimary}"
+                FontSize="{StaticResource FontSizeNormal}"
+                HorizontalTextAlignment="Center" />
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding SendCommand}" />
+            </ContentView.GestureRecognizers>
+        </ContentView>
+    </Grid>
 </ContentPage>
