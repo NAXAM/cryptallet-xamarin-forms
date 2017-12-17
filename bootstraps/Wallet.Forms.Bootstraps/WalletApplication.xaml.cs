@@ -10,6 +10,7 @@ using Wallet.Forms.Bootstraps.Services;
 using DryIoc;
 using Plugin.Share;
 using Prism.Common;
+using Acr.UserDialogs;
 
 namespace Wallet.Forms.Bootstraps
 {
@@ -68,6 +69,7 @@ namespace Wallet.Forms.Bootstraps
         {
             containerRegistry.RegisterInstance(CrossSecureStorage.Current);
             containerRegistry.RegisterInstance(CrossShare.Current);
+            containerRegistry.RegisterInstance(UserDialogs.Instance);
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
         }

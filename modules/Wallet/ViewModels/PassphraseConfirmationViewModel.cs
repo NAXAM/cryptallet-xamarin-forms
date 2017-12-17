@@ -4,14 +4,12 @@ using Prism.Navigation;
 using Wallet.Core;
 using Wallet.Services;
 using Xamarin.Forms;
+using Acr.UserDialogs;
 
 namespace Wallet.ViewModels
 {
     public class PassphraseConfirmationViewModel : ViewModelBase
     {
-        readonly NewWalletController controller;
-        readonly INavigationService navigator;
-
         string _SecondWord;
         public string SecondWord
         {
@@ -33,10 +31,17 @@ namespace Wallet.ViewModels
             set => SetProperty(ref _NinethWord, value);
         }
 
+        readonly NewWalletController controller;
+        readonly INavigationService navigator;
+        readonly IUserDialogs userDialogs;
+
         public PassphraseConfirmationViewModel(
             NewWalletController controller,
-            INavigationService navigator)
+            INavigationService navigator,
+            IUserDialogs userDialogs
+        )
         {
+            this.userDialogs = userDialogs;
             this.controller = controller;
             this.navigator = navigator;
         }
@@ -50,12 +55,13 @@ namespace Wallet.ViewModels
         async void ExecuteContinueCommand(string obj)
         {
             var words = controller.GetSeedWords();
-            var isValid = string.Equals(SecondWord, words[1])
-                            && string.Equals(FifthWord, words[4])
-                            && string.Equals(NinethWord, words[8]);
+            var isValid = string.Equals(SecondWord, words[1], StringComparison.InvariantCultureIgnoreCase)
+                                && string.Equals(FifthWord, words[4], StringComparison.InvariantCultureIgnoreCase)
+                                && string.Equals(NinethWord, words[8], StringComparison.InvariantCultureIgnoreCase);
 
             if (false == isValid)
             {
+                userDialogs.Toast("Invalid words confirmation.");
                 return;
             }
 

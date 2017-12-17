@@ -8,6 +8,5 @@
     Title="Scan QRCode"
     BackgroundColor="White">
     <zxing:ZXingScannerView
-        x:Name="scannerView"
-        ScanResultCommand="{Binding ScanCommand}" />
+        x:Name="scannerView" />
 </ContentPage>

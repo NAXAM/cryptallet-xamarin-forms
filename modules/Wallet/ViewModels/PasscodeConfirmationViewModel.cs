@@ -4,6 +4,7 @@ using Prism.Navigation;
 using Wallet.Core;
 using Wallet.Services;
 using Xamarin.Forms;
+using Acr.UserDialogs;
 
 namespace Wallet.ViewModels
 {
@@ -11,11 +12,14 @@ namespace Wallet.ViewModels
     {
         readonly NewWalletController controller;
         readonly INavigationService navigator;
+        readonly IUserDialogs userDialogs;
 
         public PasscodeConfirmationViewModel(
             NewWalletController controller,
-            INavigationService navigator)
+            INavigationService navigator,
+            IUserDialogs userDialogs)
         {
+            this.userDialogs = userDialogs;
             this.controller = controller;
             this.navigator = navigator;
         }
@@ -30,8 +34,12 @@ namespace Wallet.ViewModels
         {
             var verified = controller.VerifyPasscode(passcode);
 
-            if (false == verified) return;
+            if (false == verified)
+            {
+                userDialogs.Toast("Invalid PIN confirmation");
 
+                return;
+            }
             await controller.CreateWallet();
             await navigator.NavigateAsync(NavigationKeys.ConnfirmPasscodeOk);
         }

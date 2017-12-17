@@ -23,7 +23,7 @@ namespace Wallet.ViewModels
         bool CanExecuteScanCommand(Result obj) => true;
         async void ExecuteScanCommand(Result obj)
         {
-            await navigationService.GoBackAsync(new NavigationParameters {
+            var result = await navigationService.GoBackAsync(new NavigationParameters {
                 {"qr_code", obj.Text}
             });
         }

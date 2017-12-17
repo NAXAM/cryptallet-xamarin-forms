@@ -5,6 +5,8 @@ using Wallet.Services;
 using Xamarin.Forms;
 using Plugin.Share.Abstractions;
 using Prism.Navigation;
+using Acr.UserDialogs;
+using System.Threading.Tasks;
 
 namespace Wallet.ViewModels
 {
@@ -15,6 +17,13 @@ namespace Wallet.ViewModels
         {
             get => _Balance;
             set => SetProperty(ref _Balance, value);
+        }
+
+        decimal _BalanceInETH;
+        public decimal BalanceInETH
+        {
+            get => _BalanceInETH;
+            set => SetProperty(ref _BalanceInETH, value);
         }
 
         public string DefaultAccountAddress => accountsManager.DefaultAccountAddress;
@@ -36,16 +45,19 @@ namespace Wallet.ViewModels
         readonly IAccountsManager accountsManager;
         readonly INavigationService navigationService;
         readonly IShare share;
+        readonly IUserDialogs userDialogs;
 
         public WalletViewModel(
             IAccountsManager accountsManager,
             INavigationService navigationService,
-            IShare share
+            IShare share,
+            IUserDialogs userDialogs
         )
         {
+            this.accountsManager = accountsManager;
             this.navigationService = navigationService;
             this.share = share;
-            this.accountsManager = accountsManager;
+            this.userDialogs = userDialogs;
         }
 
         public override void OnNavigatedTo(NavigationParameters parameters)
@@ -55,12 +67,23 @@ namespace Wallet.ViewModels
                 RecipientAddress = parameters.GetValue<string>("qr_code");
             }
 
-            UpdateBalance();
+            if (Balance == 0)
+            {
+                UpdateBalance();
+            }
         }
 
         async void UpdateBalance()
         {
-            Balance = await accountsManager.GetTokensAsync(accountsManager.DefaultAccountAddress);
+            userDialogs.ShowLoading("Refreshing balance");
+            await Task.WhenAll(Task.Run(async delegate
+            {
+                Balance = await accountsManager.GetTokensAsync(accountsManager.DefaultAccountAddress);
+            }), Task.Run(async delegate
+            {
+                BalanceInETH = await accountsManager.GetBalanceInETHAsync(accountsManager.DefaultAccountAddress);
+            }));
+            userDialogs.HideLoading();
         }
 
         ICommand _ScanQRCommand;
@@ -87,7 +110,10 @@ namespace Wallet.ViewModels
 
             if (toAddress.Length != DefaultAccountAddress.Length) return;
 
-            await accountsManager.TransferAsync(DefaultAccountAddress, toAddress, SendingAmount);
+            userDialogs.ShowLoading("Sending");
+            var result = await accountsManager.TransferAsync(DefaultAccountAddress, toAddress, SendingAmount);
+            userDialogs.Toast($"tx:{result}");
+            userDialogs.HideLoading();
             UpdateBalance();
         }
 

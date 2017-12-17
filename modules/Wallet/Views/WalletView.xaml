@@ -24,6 +24,8 @@
             <x:Double
                 x:Key="FontSizeXlarge">26</x:Double>
             <x:Double
+                x:Key="FontSizeLarge">20</x:Double>
+            <x:Double
                 x:Key="FontSizeSmall">14</x:Double>
             <x:Double
                 x:Key="FontSizeXsmall">12</x:Double>
@@ -67,11 +69,8 @@
                 </zxing:ZXingBarcodeImageView.BarcodeOptions>
             </zxing:ZXingBarcodeImageView>
         </Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition
-                    Height="96" />
-            </Grid.RowDefinitions>
+        <StackLayout
+            Spacing="0">
             <Label
                 Margin="24,24,24,0"
                 Text="{Binding DefaultAccountAddress}"
@@ -79,7 +78,7 @@
                 FontSize="{StaticResource FontSizeXsmall}"
                 HorizontalTextAlignment="End" />
             <Label
-                Margin="24,40,24,0"
+                Margin="24,0,24,0"
                 Text="{Binding Balance, StringFormat='{0:#,##0.00} NXT'}"
                 TextColor="{StaticResource ColorPrimary}"
                 FontSize="{StaticResource FontSizeXlarge}"
@@ -96,7 +95,13 @@
                 FontSize="{StaticResource FontSizeSmall}"
                 HorizontalTextAlignment="End"
                 VerticalOptions="End" />
-        </Grid>
+            <Label
+                Margin="24,16"
+                Text="{Binding BalanceInETH, StringFormat='{0:#,##0.00} ETH'}"
+                TextColor="{StaticResource ColorPrimary}"
+                FontSize="{StaticResource FontSizeLarge}"
+                HorizontalTextAlignment="End" />
+        </StackLayout>
         <Grid
             HorizontalOptions="Start"
             Margin="24,48"

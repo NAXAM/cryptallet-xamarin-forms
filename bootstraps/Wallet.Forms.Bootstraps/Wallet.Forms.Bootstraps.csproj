@@ -9,6 +9,7 @@
     <PackageReference Include="sameerIOTApps.Plugin.SecureStorage" Version="1.2.2" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.0.0.340-ci" />
     <PackageReference Include="Plugin.Share" Version="7.0.2.28-beta" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.0-beta4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\modules\Wallet\Wallet.csproj" />

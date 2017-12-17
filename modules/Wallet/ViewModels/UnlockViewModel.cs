@@ -1,4 +1,5 @@
 ﻿using Wallet.Services;
+using Acr.UserDialogs;
 namespace Wallet.ViewModels
 {
     using System.Windows.Input;
@@ -8,9 +9,6 @@ namespace Wallet.ViewModels
 
     public partial class UnlockViewModel : ViewModelBase
     {
-        readonly IWalletManager walletManager;
-        readonly INavigationService navigator;
-
         string _Passcode;
         public string Passcode
         {
@@ -18,11 +16,17 @@ namespace Wallet.ViewModels
             set => SetProperty(ref _Passcode, value);
         }
 
+        readonly IWalletManager walletManager;
+        readonly INavigationService navigator;
+        readonly IUserDialogs userDialogs;
+
         public UnlockViewModel(
             INavigationService navigator,
-            IWalletManager walletManager
+            IWalletManager walletManager,
+            IUserDialogs userDialogs
         )
         {
+            this.userDialogs = userDialogs;
             this.walletManager = walletManager;
             this.navigator = navigator;
 
@@ -39,7 +43,12 @@ namespace Wallet.ViewModels
         {
             var unlocked = await walletManager.UnlockWalletAsync(Passcode);
 
-            if (unlocked == false) return;
+            if (unlocked == false)
+            {
+                userDialogs.Toast("Invalid PIN.");
+
+                return;
+            }
 
             await navigator.NavigateAsync(NavigationKeys.UnlockWallet);
         }

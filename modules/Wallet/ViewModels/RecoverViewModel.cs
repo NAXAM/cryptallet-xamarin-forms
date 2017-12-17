@@ -3,6 +3,7 @@ using Prism.Navigation;
 using Wallet.Core;
 using Wallet.Services;
 using Xamarin.Forms;
+using Acr.UserDialogs;
 
 namespace Wallet.ViewModels
 {
@@ -31,29 +32,37 @@ namespace Wallet.ViewModels
 
         readonly INavigationService navigator;
         readonly RecoverWalletController controller;
+        readonly IUserDialogs userDialogs;
 
         public RecoverViewModel(
             RecoverWalletController controller,
-            INavigationService navigator)
+            INavigationService navigator,
+            IUserDialogs userDialogs)
         {
+            this.userDialogs = userDialogs;
             this.controller = controller;
             this.navigator = navigator;
         }
 
-        ICommand _ContinueCommand;
-        public ICommand ContinueCommand
+        ICommand _ResetCommand;
+        public ICommand ResetCommand
         {
-            get { return (_ContinueCommand = _ContinueCommand ?? new Command<string>(ExecuteContinueCommand, CanExecuteContinueCommand)); }
+            get { return (_ResetCommand = _ResetCommand ?? new Command<string>(ExecuteResetCommand, CanExecuteResetCommand)); }
         }
-        bool CanExecuteContinueCommand(string obj) => true;
-        async void ExecuteContinueCommand(string passcode)
+        bool CanExecuteResetCommand(string obj) => true;
+        async void ExecuteResetCommand(string passcode)
         {
             controller.SetPasscode(Passcode);
 
             var isValid = controller.VerifyPasscode(PasscodeConfirmation)
-                                    && await controller.VerifySeedWords(Words);
+                                    && await controller.VerifySeedWords(Words.ToLower());
 
-            if (false == isValid) return;
+            if (false == isValid)
+            {
+                userDialogs.Toast("Invalid 12-word phrase or invalid passcode confirmation");
+
+                return;
+            }
 
             await navigator.NavigateAsync(NavigationKeys.RecoverWalletOk);
         }

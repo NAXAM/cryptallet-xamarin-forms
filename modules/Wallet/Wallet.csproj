@@ -12,6 +12,7 @@
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.3.2" />
     <PackageReference Include="Plugin.Share" Version="7.0.2.28-beta" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.0.0.340-ci" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.0-beta4" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
