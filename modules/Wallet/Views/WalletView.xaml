@@ -57,7 +57,7 @@
             </Grid.ColumnDefinitions>
             <zxing:ZXingBarcodeImageView
                 BarcodeFormat="QR_CODE"
-                BarcodeValue="{Binding DefaultAccountAddress}">
+                BarcodeValue="{Binding DefaultAccountAddress, StringFormat='ethereum:{0}'}">
                 <zxing:ZXingBarcodeImageView.BarcodeOptions>
                     <zxingCommon:EncodingOptions
                         PureBarcode="False"
@@ -83,7 +83,12 @@
                 Text="{Binding Balance, StringFormat='{0:#,##0.00} NXT'}"
                 TextColor="{StaticResource ColorPrimary}"
                 FontSize="{StaticResource FontSizeXlarge}"
-                HorizontalTextAlignment="End" />
+                HorizontalTextAlignment="End">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding RefreshBalanceCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
             <Label
                 Margin="24,0"
                 Text="{Binding Balance, Converter={StaticResource NXTtoUSDConverter}}"
@@ -91,6 +96,25 @@
                 FontSize="{StaticResource FontSizeSmall}"
                 HorizontalTextAlignment="End"
                 VerticalOptions="End" />
+        </Grid>
+        <Grid
+            HorizontalOptions="Start"
+            Margin="24,48"
+            Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="144" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="144" />
+            </Grid.ColumnDefinitions>
+            <Label>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding ShareCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
         </Grid>
         <Grid
             Grid.Row="1"
@@ -114,8 +138,20 @@
             <Entry
                 Grid.Row="1"
                 Text="{Binding RecipientAddress}"
-                IsPassword="true"
                 Placeholder="Enter your friend's Ethereum address" />
+            <Image
+                Grid.Row="1"
+                Margin="12"
+                HeightRequest="40"
+                WidthRequest="40"
+                VerticalOptions="Center"
+                HorizontalOptions="End"
+                Source="ic_qr_code">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding ScanQRCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
             <Entry
                 Grid.Row="2"
                 Text="{Binding SendingAmount}"

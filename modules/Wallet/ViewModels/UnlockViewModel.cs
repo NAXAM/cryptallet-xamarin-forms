@@ -2,6 +2,7 @@
 namespace Wallet.ViewModels
 {
     using System.Windows.Input;
+    using Prism.Navigation;
     using Wallet.Core;
     using Xamarin.Forms;
 

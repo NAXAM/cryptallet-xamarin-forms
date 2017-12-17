@@ -16,49 +16,44 @@ namespace Wallet.Forms.Bootstraps.Services
         {
         }
 
-        protected async override System.Threading.Tasks.Task DoPush(Page currentPage, Page page, bool? useModalNavigation, bool animated, bool insertBeforeLast = false, int navigationOffset = 0)
+        public async override System.Threading.Tasks.Task NavigateAsync(string name, NavigationParameters parameters)
         {
-            if (currentPage?.BindingContext is ViewModelBase vm1)
+            Uri uri = null;
+
+            switch (name)
             {
-                vm1.Unload(null);
+                case Wallet.NavigationKeys.UnlockWallet:
+                case Wallet.NavigationKeys.RecoverWalletOk:
+                    uri = Routes.Home;
+                    break;
+                case Wallet.NavigationKeys.CreateWallet:
+                    uri = Routes.WalletPasscode;
+                    break;
+                case Wallet.NavigationKeys.ConfirmPasscode:
+                    uri = Routes.WalletPasscodeConfirmation;
+                    break;
+                case Wallet.NavigationKeys.ConnfirmPasscodeOk:
+                    uri = Routes.WalletPassphrase;
+                    break;
+                case Wallet.NavigationKeys.ConfirmPassphrase:
+                    uri = Routes.WalletPassphraseConfirmation;
+                    break;
+                case Wallet.NavigationKeys.ConfirmPassphraseOk:
+                    uri = Routes.Wallet;
+                    break;
+                case Wallet.NavigationKeys.RecoverWallet:
+                    uri = Routes.WalletRecover;
+                    break;
+                case Wallet.NavigationKeys.ScanQRCode:
+                    uri = Routes.QRCodeScanner;
+                    break;
+
+                default:
+                    await NavigateAsync(name, parameters);
+                    return;
             }
 
-            await base.DoPush(currentPage, page, useModalNavigation, animated, insertBeforeLast, navigationOffset);
-
-            if (page?.BindingContext is ViewModelBase vm2)
-            {
-                vm2.Load(null);
-            }
-        }
-
-
-        protected async override System.Threading.Tasks.Task<bool> GoBackInternal(NavigationParameters parameters, bool? useModalNavigation, bool animated)
-        {
-            var result = await base.GoBackInternal(parameters, useModalNavigation, animated);
-
-            if (result)
-            {
-                var currentPage = GetCurrentPage();
-
-                if (currentPage?.BindingContext is ViewModelBase vm2)
-                {
-                    vm2.Load(null);
-                }
-            }
-
-            return result;
-        }
-
-        protected async override System.Threading.Tasks.Task<Page> DoPop(INavigation navigation, bool useModalNavigation, bool animated)
-        {
-            var page = await base.DoPop(navigation, useModalNavigation, animated);
-
-            if (page.BindingContext is ViewModelBase vm1)
-            {
-                vm1.Unload(null);
-            }
-
-            return page;
+            await NavigateAsync(uri, parameters);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Wallet.Services
 
         Task<string[]> GetAccountsAsync();
 
-        Task<decimal> GetBalanceInBQCAsync(string accountAddress);
+        Task<decimal> GetTokensAsync(string accountAddress);
         Task<decimal> GetBalanceInETHAsync(string accountAddress);
 
         Task GetTransactionsAsync(bool sent = false);
@@ -46,7 +46,7 @@ namespace Wallet.Services
             return new string[] { DefaultAccountAddress };
         }
 
-        public async Task<decimal> GetBalanceInBQCAsync(string accountAddress)
+        public async Task<decimal> GetTokensAsync(string accountAddress)
         {
             return await standardTokenService.GetBalanceOfAsync<int>(accountAddress);
         }

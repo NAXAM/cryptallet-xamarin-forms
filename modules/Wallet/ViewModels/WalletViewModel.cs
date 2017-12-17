@@ -3,6 +3,8 @@ using System.Windows.Input;
 using Wallet.Core;
 using Wallet.Services;
 using Xamarin.Forms;
+using Plugin.Share.Abstractions;
+using Prism.Navigation;
 
 namespace Wallet.ViewModels
 {
@@ -32,17 +34,44 @@ namespace Wallet.ViewModels
         }
 
         readonly IAccountsManager accountsManager;
+        readonly INavigationService navigationService;
+        readonly IShare share;
 
-        public WalletViewModel(IAccountsManager accountsManager)
+        public WalletViewModel(
+            IAccountsManager accountsManager,
+            INavigationService navigationService,
+            IShare share
+        )
         {
+            this.navigationService = navigationService;
+            this.share = share;
             this.accountsManager = accountsManager;
         }
 
-        public async override void Load(object data)
+        public override void OnNavigatedTo(NavigationParameters parameters)
         {
-            base.Load(data);
+            if (parameters.ContainsKey("qr_code"))
+            {
+                RecipientAddress = parameters.GetValue<string>("qr_code");
+            }
 
-            Balance = await accountsManager.GetBalanceInBQCAsync(accountsManager.DefaultAccountAddress);
+            UpdateBalance();
+        }
+
+        async void UpdateBalance()
+        {
+            Balance = await accountsManager.GetTokensAsync(accountsManager.DefaultAccountAddress);
+        }
+
+        ICommand _ScanQRCommand;
+        public ICommand ScanQRCommand
+        {
+            get { return (_ScanQRCommand = _ScanQRCommand ?? new Command<object>(ExecuteScanQRCommand, CanExecuteScanQRCommand)); }
+        }
+        bool CanExecuteScanQRCommand(object obj) => true;
+        async void ExecuteScanQRCommand(object obj)
+        {
+            await navigationService.NavigateAsync(NavigationKeys.ScanQRCode);
         }
 
         ICommand _SendCommand;
@@ -51,6 +80,41 @@ namespace Wallet.ViewModels
             get { return (_SendCommand = _SendCommand ?? new Command<object>(ExecuteSendCommand, CanExecuteSendCommand)); }
         }
         bool CanExecuteSendCommand(object obj) => true;
-        void ExecuteSendCommand(object obj) { }
+        async void ExecuteSendCommand(object obj)
+        {
+            if (string.IsNullOrWhiteSpace(RecipientAddress) || SendingAmount <= 0) return;
+            var toAddress = RecipientAddress.Trim();
+
+            if (toAddress.Length != DefaultAccountAddress.Length) return;
+
+            await accountsManager.TransferAsync(DefaultAccountAddress, toAddress, SendingAmount);
+            UpdateBalance();
+        }
+
+        ICommand _ShareCommand;
+        public ICommand ShareCommand
+        {
+            get { return (_ShareCommand = _ShareCommand ?? new Command<object>(ExecuteShareCommand, CanExecuteShareCommand)); }
+        }
+        bool CanExecuteShareCommand(object obj) => true;
+        void ExecuteShareCommand(object obj)
+        {
+            share.Share(new ShareMessage
+            {
+                Title = "My Ethereum Address",
+                Text = $"ethereum:{DefaultAccountAddress}"
+            });
+        }
+
+        ICommand _RefreshBalanceCommand;
+        public ICommand RefreshBalanceCommand
+        {
+            get { return (_RefreshBalanceCommand = _RefreshBalanceCommand ?? new Command<object>(ExecuteRefreshBalanceCommand, CanExecuteRefreshBalanceCommand)); }
+        }
+        bool CanExecuteRefreshBalanceCommand(object obj) => true;
+        void ExecuteRefreshBalanceCommand(object obj)
+        {
+            UpdateBalance();
+        }
     }
 }

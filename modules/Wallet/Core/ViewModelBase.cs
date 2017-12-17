@@ -1,6 +1,7 @@
-﻿namespace Wallet.Core
+﻿using Prism.Navigation;
+namespace Wallet.Core
 {
-    public abstract class ViewModelBase : ModelBase
+    public abstract class ViewModelBase : ModelBase, INavigationAware
     {
         bool _ShouldShowNavigationBar = true;
         public bool ShouldShowNavigationBar
@@ -9,7 +10,16 @@
             set => SetProperty(ref _ShouldShowNavigationBar, value);
         }
 
-        public virtual void Load(object data) { }
-        public virtual void Unload(object data) { }
+        public virtual void OnNavigatedFrom(NavigationParameters parameters)
+        {
+        }
+
+        public virtual void OnNavigatedTo(NavigationParameters parameters)
+        {
+        }
+
+        public virtual void OnNavigatingTo(NavigationParameters parameters)
+        {
+        }
     }
 }

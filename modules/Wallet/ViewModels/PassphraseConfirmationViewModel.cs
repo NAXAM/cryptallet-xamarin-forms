@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using Prism.Navigation;
 using Wallet.Core;
 using Wallet.Services;
 using Xamarin.Forms;

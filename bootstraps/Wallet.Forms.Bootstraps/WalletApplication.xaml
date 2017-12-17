@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<prism:PrismApplication
+<prism:PrismApplicationBase
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+    xmlns:prism="clr-namespace:Prism;assembly=Prism.Forms"
 	x:Class="Wallet.Forms.Bootstraps.WalletApplication">
-</prism:PrismApplication>
+</prism:PrismApplicationBase>
