@@ -3,10 +3,10 @@ using Xamarin.Forms.Platform.iOS;
 using UIKit;
 using CoreGraphics;
 using Xamarin.Forms;
-using Wallet.Controls.iOS;
+using Wallet.Controls.iOS.Renderers;
 
 [assembly: ExportRenderer(typeof(Entry), typeof(CustomEntryRenderer))]
-namespace Wallet.Controls.iOS
+namespace Wallet.Controls.iOS.Renderers
 {
     public class CustomEntryRenderer : EntryRenderer
     {

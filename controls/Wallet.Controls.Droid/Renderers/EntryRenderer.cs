@@ -2,13 +2,15 @@
 using Xamarin.Forms.Platform.Android;
 using Android.Content;
 using Xamarin.Forms;
-using Wallet.Controls.Renderers;
+using Wallet.Controls.Droid.Renderers;
 
 [assembly: ExportRenderer(typeof(Entry), typeof(CustomEntryRenderer))]
-namespace Wallet.Controls.Renderers
+namespace Wallet.Controls.Droid.Renderers
 {
     public class CustomEntryRenderer : EntryRenderer
     {
+        public static void Preserve() { }
+
         public CustomEntryRenderer(Context context) : base(context)
         {
 

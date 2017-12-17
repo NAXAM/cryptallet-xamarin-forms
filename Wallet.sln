@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Controls.Droid", "co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Controls.iOS", "controls\Wallet.Controls.iOS\Wallet.Controls.iOS.csproj", "{F3C1A296-A10B-4C94-ABCC-F899D1FF00D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet.Controls", "controls\Wallet.Controls\Wallet.Controls.csproj", "{58B1A190-9FB4-4086-939A-5B3427D9F6E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,18 @@ Global
 		{F3C1A296-A10B-4C94-ABCC-F899D1FF00D5}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{F3C1A296-A10B-4C94-ABCC-F899D1FF00D5}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{F3C1A296-A10B-4C94-ABCC-F899D1FF00D5}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{58B1A190-9FB4-4086-939A-5B3427D9F6E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58B1A190-9FB4-4086-939A-5B3427D9F6E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58B1A190-9FB4-4086-939A-5B3427D9F6E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58B1A190-9FB4-4086-939A-5B3427D9F6E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58B1A190-9FB4-4086-939A-5B3427D9F6E0}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{58B1A190-9FB4-4086-939A-5B3427D9F6E0}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{58B1A190-9FB4-4086-939A-5B3427D9F6E0}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{58B1A190-9FB4-4086-939A-5B3427D9F6E0}.Release|iPhone.Build.0 = Release|Any CPU
+		{58B1A190-9FB4-4086-939A-5B3427D9F6E0}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{58B1A190-9FB4-4086-939A-5B3427D9F6E0}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{58B1A190-9FB4-4086-939A-5B3427D9F6E0}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{58B1A190-9FB4-4086-939A-5B3427D9F6E0}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C177E410-74C7-45F0-8687-FA5C491F7590} = {63FE71AD-8F52-47FF-BAF8-7F06F683EE4C}
@@ -126,5 +140,6 @@ Global
 		{CF637A64-AF39-4A9F-832F-0869FABBF9FF} = {6A6EA33E-E02D-4C4A-929B-8914D2B6BBEF}
 		{399B1C4B-AFCC-4491-8053-51B47196522E} = {318A46AD-E0C9-4CC3-9C0C-5508F701B09A}
 		{F3C1A296-A10B-4C94-ABCC-F899D1FF00D5} = {318A46AD-E0C9-4CC3-9C0C-5508F701B09A}
+		{58B1A190-9FB4-4086-939A-5B3427D9F6E0} = {318A46AD-E0C9-4CC3-9C0C-5508F701B09A}
 	EndGlobalSection
 EndGlobal

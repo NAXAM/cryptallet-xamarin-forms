@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrl="clr-namespace:Wallet.Controls;assembly=Wallet.Controls"
+    x:Class="Wallet.Controls.Passcode">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Color
+                x:Key="ColorPrimary">#3574FA</Color>
+            <Color
+                x:Key="ColorTextPrimary">#FFFFFF</Color>
+            <Color
+                x:Key="ColorTextAccent">#384951</Color>
+            <Color
+                x:Key="ColorTextSecondary">#B2B2B2</Color>
+            <x:Double
+                x:Key="FontSizeNormal">36</x:Double>
+            <x:Double
+                x:Key="FontSizeSmall">14</x:Double>
+            <OnPlatform
+                x:Key="NumberPadItemSize"
+                x:TypeArguments="GridLength"
+                Android="56"
+                iOS="48" />
+            <OnPlatform
+                x:Key="PasscodeItemSize"
+                x:TypeArguments="GridLength"
+                Android="20"
+                iOS="16" />
+            <OnPlatform
+                x:Key="PasscodeItemSpacing"
+                x:TypeArguments="x:Double"
+                Android="10"
+                iOS="8" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="*" />
+            <RowDefinition
+                Height="*" />
+        </Grid.RowDefinitions>
+        <Grid
+            x:Name="grdPasscode"
+            RowSpacing="0"
+            ColumnSpacing="{StaticResource PasscodeItemSpacing}"
+            VerticalOptions="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="{StaticResource PasscodeItemSize}" />
+                <ColumnDefinition
+                    Width="{StaticResource PasscodeItemSize}" />
+                <ColumnDefinition
+                    Width="{StaticResource PasscodeItemSize}" />
+                <ColumnDefinition
+                    Width="{StaticResource PasscodeItemSize}" />
+                <ColumnDefinition
+                    Width="{StaticResource PasscodeItemSize}" />
+                <ColumnDefinition
+                    Width="{StaticResource PasscodeItemSize}" />
+                <ColumnDefinition
+                    Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="{StaticResource PasscodeItemSize}" />
+            </Grid.RowDefinitions>
+            <Image
+                Source="ic_passcode"
+                ctrl:ImageProperties.Color="{StaticResource ColorTextSecondary}"
+                Grid.Column="1" />
+            <Image
+                Source="ic_passcode"
+                ctrl:ImageProperties.Color="{StaticResource ColorTextSecondary}"
+                Grid.Column="2" />
+            <Image
+                Source="ic_passcode"
+                ctrl:ImageProperties.Color="{StaticResource ColorTextSecondary}"
+                Grid.Column="3" />
+            <Image
+                Source="ic_passcode"
+                ctrl:ImageProperties.Color="{StaticResource ColorTextSecondary}"
+                Grid.Column="4" />
+            <Image
+                Source="ic_passcode"
+                ctrl:ImageProperties.Color="{StaticResource ColorTextSecondary}"
+                Grid.Column="5" />
+            <Image
+                Source="ic_passcode"
+                ctrl:ImageProperties.Color="{StaticResource ColorTextSecondary}"
+                Grid.Column="6" />
+        </Grid>
+        <Grid
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            VerticalOptions="End"
+            RowSpacing="16"
+            ColumnSpacing="32">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="{StaticResource NumberPadItemSize}" />
+                <ColumnDefinition
+                    Width="{StaticResource NumberPadItemSize}" />
+                <ColumnDefinition
+                    Width="{StaticResource NumberPadItemSize}" />
+                <ColumnDefinition
+                    Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="*" />
+                <RowDefinition
+                    Height="{StaticResource NumberPadItemSize}" />
+                <RowDefinition
+                    Height="{StaticResource NumberPadItemSize}" />
+                <RowDefinition
+                    Height="{StaticResource NumberPadItemSize}" />
+                <RowDefinition
+                    Height="{StaticResource NumberPadItemSize}" />
+                <RowDefinition
+                    Height="16" />
+            </Grid.RowDefinitions>
+            <Grid
+                Grid.Row="1"
+                Grid.Column="1">
+                <Image
+                    Source="bg_pad_number"
+                    ctrl:ImageProperties.Color="White">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label
+                    Text="1"
+                    TextColor="{StaticResource ColorTextAccent}"
+                    FontSize="{StaticResource FontSizeNormal}"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <Grid
+                Grid.Row="1"
+                Grid.Column="2">
+                <Image
+                    Source="bg_pad_number"
+                    ctrl:ImageProperties.Color="White">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label
+                    Text="2"
+                    TextColor="{StaticResource ColorTextAccent}"
+                    FontSize="{StaticResource FontSizeNormal}"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <Grid
+                Grid.Row="1"
+                Grid.Column="3">
+                <Image
+                    Source="bg_pad_number"
+                    ctrl:ImageProperties.Color="White">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label
+                    Text="3"
+                    TextColor="{StaticResource ColorTextAccent}"
+                    FontSize="{StaticResource FontSizeNormal}"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <Grid
+                Grid.Row="2"
+                Grid.Column="1">
+                <Image
+                    Source="bg_pad_number"
+                    ctrl:ImageProperties.Color="White">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label
+                    Text="4"
+                    TextColor="{StaticResource ColorTextAccent}"
+                    FontSize="{StaticResource FontSizeNormal}"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <Grid
+                Grid.Row="2"
+                Grid.Column="2">
+                <Image
+                    Source="bg_pad_number"
+                    ctrl:ImageProperties.Color="White">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label
+                    Text="5"
+                    TextColor="{StaticResource ColorTextAccent}"
+                    FontSize="{StaticResource FontSizeNormal}"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <Grid
+                Grid.Row="2"
+                Grid.Column="3">
+                <Image
+                    Source="bg_pad_number"
+                    ctrl:ImageProperties.Color="White">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label
+                    Text="6"
+                    TextColor="{StaticResource ColorTextAccent}"
+                    FontSize="{StaticResource FontSizeNormal}"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <Grid
+                Grid.Row="3"
+                Grid.Column="1">
+                <Image
+                    Source="bg_pad_number"
+                    ctrl:ImageProperties.Color="White">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label
+                    Text="7"
+                    TextColor="{StaticResource ColorTextAccent}"
+                    FontSize="{StaticResource FontSizeNormal}"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <Grid
+                Grid.Row="3"
+                Grid.Column="2">
+                <Image
+                    Source="bg_pad_number"
+                    ctrl:ImageProperties.Color="White">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label
+                    Text="8"
+                    TextColor="{StaticResource ColorTextAccent}"
+                    FontSize="{StaticResource FontSizeNormal}"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <Grid
+                Grid.Row="3"
+                Grid.Column="3">
+                <Image
+                    Source="bg_pad_number"
+                    ctrl:ImageProperties.Color="White">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label
+                    Text="9"
+                    TextColor="{StaticResource ColorTextAccent}"
+                    FontSize="{StaticResource FontSizeNormal}"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <Grid
+                Grid.Row="4"
+                Grid.Column="2">
+                <Image
+                    Source="bg_pad_number"
+                    ctrl:ImageProperties.Color="White">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label
+                    Text="0"
+                    TextColor="{StaticResource ColorTextAccent}"
+                    FontSize="{StaticResource FontSizeNormal}"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <Grid
+                Grid.Row="4"
+                Grid.Column="3">
+                <Image
+                    Source="bg_pad_number"
+                    ctrl:ImageProperties.Color="White">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Source="ic_pad_delete">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="PaddNumberTapped_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentView>

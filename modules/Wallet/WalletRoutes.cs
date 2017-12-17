@@ -8,7 +8,7 @@ namespace Wallet
         public const string RecoverWallet = "__wallet__UNLOCK__RECOVER_WALLET";
         public const string ConfirmPasscode = "__wallet__PASSCODE_CONFIRMATION";
         public const string ConnfirmPasscodeOk = "__wallet__PASSCODE_CONFIRMATION_OK";
-        public const string ConfirmaPassphrase = "__wallet__PASSPRASE_CONFIRMATION";
-        public const string ConfirmaPassphraseOk = "__wallet__PASSPRASE_CONFIRMATION_OK";
+        public const string ConfirmPassphrase = "__wallet__PASSPRASE_CONFIRMATION";
+        public const string ConfirmPassphraseOk = "__wallet__PASSPRASE_CONFIRMATION_OK";
     }
 }

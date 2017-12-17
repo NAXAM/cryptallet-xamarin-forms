@@ -64,10 +64,10 @@ namespace Wallet.Forms.Bootstraps.Modules
                     case Wallet.NavigationKeys.ConnfirmPasscodeOk:
                         uri = Routes.WalletPassphrase;
                         break;
-                    case Wallet.NavigationKeys.ConfirmaPassphrase:
+                    case Wallet.NavigationKeys.ConfirmPassphrase:
                         uri = Routes.WalletPasscodeConfirmation;
                         break;
-                    case Wallet.NavigationKeys.ConfirmaPassphraseOk:
+                    case Wallet.NavigationKeys.ConfirmPassphraseOk:
                         uri = Routes.Wallet;
                         break;
                     case Wallet.NavigationKeys.RecoverWallet:
