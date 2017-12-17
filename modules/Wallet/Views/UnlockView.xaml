@@ -2,9 +2,9 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Wallet.Views.UnlockView"
     BackgroundColor="White"
-    NavigationPage.HasNavigationBar="{Binding ShouldShowNavigationBar}"
-    x:Class="Wallet.Views.UnlockView">
+    NavigationPage.HasNavigationBar="{Binding ShouldShowNavigationBar}">
     <Grid
         RowSpacing="0"
         ColumnSpacing="0">
@@ -65,6 +65,7 @@
                 Grid.ColumnSpan="2"
                 Keyboard="Numeric"
                 Text="{Binding Passcode}"
+                IsPassword="true"
                 Placeholder="Enter your passcode" />
             <ContentView
                 Grid.Column="0"

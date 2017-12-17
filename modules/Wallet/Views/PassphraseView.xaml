@@ -1,8 +1,80 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage
-	xmlns="http://xamarin.com/schemas/2014/forms"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="Wallet.Views.PassphraseView">
-	<ContentPage.Content>
-	</ContentPage.Content>
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Wallet.Views.PassphraseView"
+    Title="Create wallet - Step 3"
+    BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color
+                x:Key="ColorPrimary">#3574FA</Color>
+            <Color
+                x:Key="ColorTextPrimary">#FFFFFF</Color>
+            <Color
+                x:Key="ColorTextAccent">#384951</Color>
+            <Color
+                x:Key="ColorTextSecondary">#B2B2B2</Color>
+            <x:Double
+                x:Key="FontSizeXlarge">26</x:Double>
+            <x:Double
+                x:Key="FontSizeLarge">20</x:Double>
+            <x:Double
+                x:Key="FontSizeNormal">16</x:Double>
+            <x:Double
+                x:Key="FontSizeSmall">14</x:Double>
+            <OnPlatform
+                x:Key="NumberPadItemSize"
+                x:TypeArguments="GridLength"
+                Android="48"
+                iOS="40">
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid
+        RowSpacing="0"
+        ColumnSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="2*" />
+            <RowDefinition
+                Height="3*" />
+        </Grid.RowDefinitions>
+        <StackLayout
+            Padding="24">
+            <Label
+                Text="Paper Key Security"
+                TextColor="{StaticResource ColorTextAccent}"
+                FontSize="{StaticResource FontSizeXlarge}" />
+            <Label
+                x:Name="lblWarning"
+                TextColor="{StaticResource ColorTextAccent}"
+                FontSize="{StaticResource FontSizeNormal}" />
+        </StackLayout>
+        <Grid
+            Grid.Row="1"
+            Padding="32"
+            BackgroundColor="#FAFAFA">
+            <Label
+                Text="{Binding Words}"
+                HorizontalTextAlignment="Center"
+                TextColor="{StaticResource ColorTextAccent}"
+                FontSize="{StaticResource FontSizeLarge}" />
+        </Grid>
+        <ContentView
+            Grid.Row="1"
+            Padding="16"
+            VerticalOptions="End"
+            BackgroundColor="{StaticResource ColorPrimary}">
+            <Label
+                Text="I'VE WRITTEN IT DOWN"
+                TextColor="{StaticResource ColorTextPrimary}"
+                FontSize="{StaticResource FontSizeNormal}"
+                HorizontalTextAlignment="Center" />
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding ContinueCommand}" />
+            </ContentView.GestureRecognizers>
+        </ContentView>
+    </Grid>
 </ContentPage>

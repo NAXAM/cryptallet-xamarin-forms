@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ctrl="clr-namespace:Wallet.Controls;"
     x:Class="Wallet.Views.PasscodeView"
-    Title="Create Wallet - Step 1">
+    Title="Create Wallet - Step 1"
+    BackgroundColor="White">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color

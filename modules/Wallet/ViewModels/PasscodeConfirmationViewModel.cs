@@ -31,6 +31,7 @@ namespace Wallet.ViewModels
 
             if (false == verified) return;
 
+            await controller.CreateWallet();
             await navigator.NavigateAsync(NavigationKeys.ConnfirmPasscodeOk);
         }
     }

@@ -20,7 +20,22 @@ namespace Wallet.Controls.Droid.Renderers
         {
             base.OnElementChanged(e);
 
-            if (Control == null) return;
+            UpdateBackground();
+        }
+
+        protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+
+            if (e.PropertyName == Entry.BackgroundColorProperty.PropertyName)
+            {
+                UpdateBackground();
+            }
+        }
+
+        void UpdateBackground()
+        {
+            if (Control == null || Element == null) return;
 
             Control.SetBackgroundResource(Resource.Drawable.bg_edittext);
             int padding = (int)Context.ToPixels(16);
