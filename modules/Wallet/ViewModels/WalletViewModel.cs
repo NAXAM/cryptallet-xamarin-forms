@@ -64,13 +64,24 @@ namespace Wallet.ViewModels
         {
             if (parameters.ContainsKey("qr_code"))
             {
-                RecipientAddress = parameters.GetValue<string>("qr_code");
+                ExtractAccountAddress(parameters.GetValue<string>("qr_code"));
             }
 
             if (Balance == 0)
             {
                 UpdateBalance();
             }
+        }
+
+        void ExtractAccountAddress(string qr)
+        {
+            if (string.IsNullOrWhiteSpace(qr)) return;
+
+            var fragments = qr.Split(new char[] { ':', '?' }, StringSplitOptions.RemoveEmptyEntries);
+
+            RecipientAddress = fragments.Length == 1
+                                        ? fragments[0]
+                                        : fragments[1];
         }
 
         async void UpdateBalance()
