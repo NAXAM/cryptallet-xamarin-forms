@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\packages\Xamarin.Forms.2.5.0.121934\build\netstandard1.0\Xamarin.Forms.props" Condition="Exists('..\..\packages\Xamarin.Forms.2.5.0.121934\build\netstandard1.0\Xamarin.Forms.props')" />
   <Import Project="..\packages\Xamarin.Forms.2.5.0.121934\build\netstandard1.0\Xamarin.Forms.props" Condition="Exists('..\packages\Xamarin.Forms.2.5.0.121934\build\netstandard1.0\Xamarin.Forms.props')" />
@@ -82,6 +82,9 @@
     <CodesignProvision>naxam_dev</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Portable.BouncyCastle.1.8.1.1\lib\netstandard1.3\crypto.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -158,9 +161,6 @@
     <Reference Include="Acr.UserDialogs.Interface">
       <HintPath>..\..\packages\Acr.UserDialogs.7.0.0-beta4\lib\Xamarin.iOS10\Acr.UserDialogs.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\..\packages\Portable.BouncyCastle.1.8.1.3\lib\netstandard2.0\BouncyCastle.Crypto.dll</HintPath>
-    </Reference>
     <Reference Include="NBitcoin">
       <HintPath>..\..\packages\NBitcoin.4.0.0.50\lib\netstandard1.3\NBitcoin.dll</HintPath>
     </Reference>
@@ -205,17 +205,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
-    <Folder Include="Assets.xcassets\ic_passcode.imageset\" />
     <Folder Include="Assets.xcassets\bg_pad_number.imageset\" />
     <Folder Include="Assets.xcassets\ic_pad_delete.imageset\" />
     <Folder Include="Assets.xcassets\ic_pad_delete_white.imageset\" />
+    <Folder Include="Assets.xcassets\ic_passcode.imageset\" />
     <Folder Include="Assets.xcassets\ic_qr_code.imageset\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
     <None Include="packages.config" />
@@ -243,55 +244,153 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%403x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%403x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%403x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-57x57%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-57x57%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%403x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-72x72%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-72x72%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%403x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-83.5x83.5%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-Small-50x50%401x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-Small-50x50%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\ItunesArtwork%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ic_splash.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\ic_splash.imageset\ic_splash.png" />
-    <ImageAsset Include="Assets.xcassets\ic_splash.imageset\ic_splash%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ic_splash.imageset\ic_splash%403x.png" />
-    <ImageAsset Include="Assets.xcassets\ic_passcode.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\ic_passcode.imageset\ic_passcode.png" />
-    <ImageAsset Include="Assets.xcassets\ic_passcode.imageset\ic_passcode%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ic_passcode.imageset\ic_passcode%403x.png" />
-    <ImageAsset Include="Assets.xcassets\bg_pad_number.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\bg_pad_number.imageset\bg_pad_number.png" />
-    <ImageAsset Include="Assets.xcassets\bg_pad_number.imageset\bg_pad_number%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ic_pad_delete.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\ic_pad_delete.imageset\ic_pad_delete.png" />
-    <ImageAsset Include="Assets.xcassets\ic_pad_delete.imageset\ic_pad_delete%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ic_pad_delete.imageset\ic_pad_delete%403x.png" />
-    <ImageAsset Include="Assets.xcassets\ic_pad_delete_white.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\ic_pad_delete_white.imageset\ic_pad_delete_white.png" />
-    <ImageAsset Include="Assets.xcassets\ic_pad_delete_white.imageset\ic_pad_delete_white%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ic_pad_delete_white.imageset\ic_pad_delete_white%403x.png" />
-    <ImageAsset Include="Assets.xcassets\ic_qr_code.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\ic_qr_code.imageset\ic_qr_code.png" />
-    <ImageAsset Include="Assets.xcassets\ic_qr_code.imageset\ic_qr_code%402x.png" />
-    <ImageAsset Include="Assets.xcassets\ic_qr_code.imageset\ic_qr_code%403x.png" />
-    <ImageAsset Include="Assets.xcassets\bg_pad_number.imageset\bg_pad_number%403x.png" />
+    <ImageAsset Include="Assets.xcassets\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-57x57%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-57x57%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-72x72%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-72x72%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-83.5x83.5%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-Small-50x50%401x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-Small-50x50%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\ItunesArtwork%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_splash.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_splash.imageset\ic_splash.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_splash.imageset\ic_splash%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_splash.imageset\ic_splash%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_passcode.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_passcode.imageset\ic_passcode.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_passcode.imageset\ic_passcode%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_passcode.imageset\ic_passcode%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\bg_pad_number.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\bg_pad_number.imageset\bg_pad_number.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\bg_pad_number.imageset\bg_pad_number%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_pad_delete.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_pad_delete.imageset\ic_pad_delete.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_pad_delete.imageset\ic_pad_delete%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_pad_delete.imageset\ic_pad_delete%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_pad_delete_white.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_pad_delete_white.imageset\ic_pad_delete_white.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_pad_delete_white.imageset\ic_pad_delete_white%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_pad_delete_white.imageset\ic_pad_delete_white%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_qr_code.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_qr_code.imageset\ic_qr_code.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_qr_code.imageset\ic_qr_code%402x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_qr_code.imageset\ic_qr_code%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\bg_pad_number.imageset\bg_pad_number%403x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.5.0.121934\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.5.0.121934\build\netstandard1.0\Xamarin.Forms.targets')" />
