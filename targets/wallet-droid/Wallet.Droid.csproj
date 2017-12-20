@@ -179,9 +179,6 @@
     <Reference Include="Acr.UserDialogs.Interface">
       <HintPath>..\..\packages\Acr.UserDialogs.7.0.0-beta4\lib\MonoAndroid10\Acr.UserDialogs.Interface.dll</HintPath>
     </Reference>
-    <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\..\packages\Portable.BouncyCastle.1.8.1.3\lib\netstandard2.0\BouncyCastle.Crypto.dll</HintPath>
-    </Reference>
     <Reference Include="NBitcoin">
       <HintPath>..\..\packages\NBitcoin.4.0.0.50\lib\netstandard1.3\NBitcoin.dll</HintPath>
     </Reference>
@@ -223,6 +220,9 @@
     </Reference>
     <Reference Include="Nethereum.StandardTokenEIP20">
       <HintPath>..\..\packages\Nethereum.StandardTokenEIP20.2.2.3\lib\netstandard1.1\Nethereum.StandardTokenEIP20.dll</HintPath>
+    </Reference>
+    <Reference Include="crypto">
+      <HintPath>..\..\packages\Portable.BouncyCastle.1.8.1.1\lib\netstandard1.3\crypto.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
