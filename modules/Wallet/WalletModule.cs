@@ -4,6 +4,7 @@ using Wallet.ViewModels;
 using Prism.Modularity;
 using Prism.Ioc;
 using Wallet.Services;
+using System;
 
 namespace Wallet
 {
@@ -33,6 +34,7 @@ namespace Wallet
             containerRegistry.RegisterForNavigation<PassphraseConfirmationView, PasscodeConfirmationViewModel>();
             containerRegistry.RegisterForNavigation<WalletView, WalletViewModel>();
             containerRegistry.RegisterForNavigation<RecoverView, RecoverViewModel>();
+            containerRegistry.RegisterForNavigation<TransactionHistoryView, TransactionHistoryViewModel>();
         }
     }
 
@@ -47,6 +49,7 @@ namespace Wallet
         public const string ConnfirmPasscodeOk = "__wallet__PASSCODE_CONFIRMATION_OK";
         public const string ConfirmPassphrase = "__wallet__PASSPRASE_CONFIRMATION";
         public const string ConfirmPassphraseOk = "__wallet__PASSPRASE_CONFIRMATION_OK";
+        public const string WalletViewHistory = "__wallet__WALLET_VIEW_HISTORY";
     }
 }
 

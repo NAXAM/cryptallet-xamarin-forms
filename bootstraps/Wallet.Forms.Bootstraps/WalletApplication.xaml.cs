@@ -100,5 +100,6 @@ namespace Wallet.Forms.Bootstraps
         public static readonly Uri Wallet = new Uri($"{nameof(WalletView)}", UriKind.Relative);
         public static readonly Uri WalletRecover = new Uri($"{nameof(RecoverView)}", UriKind.Relative);
         public static readonly Uri QRCodeScanner = new Uri($"{nameof(ScanQRCodeView)}", UriKind.Relative);
+        internal static readonly Uri WalletViewHistory = new Uri($"{nameof(TransactionHistoryView)}", UriKind.Relative);
     }
 }

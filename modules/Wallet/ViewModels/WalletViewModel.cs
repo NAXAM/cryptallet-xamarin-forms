@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Wallet.ViewModels
 {
-    public class WalletViewModel : ViewModelBase
+    public partial class WalletViewModel : ViewModelBase
     {
         decimal _Balance;
         public decimal Balance
@@ -27,20 +27,6 @@ namespace Wallet.ViewModels
         }
 
         public string DefaultAccountAddress => accountsManager.DefaultAccountAddress;
-
-        string _RecipientAddress;
-        public string RecipientAddress
-        {
-            get => _RecipientAddress;
-            set => SetProperty(ref _RecipientAddress, value);
-        }
-
-        decimal _SendingAmount;
-        public decimal SendingAmount
-        {
-            get => _SendingAmount;
-            set => SetProperty(ref _SendingAmount, value);
-        }
 
         readonly IAccountsManager accountsManager;
         readonly INavigationService navigationService;
@@ -73,17 +59,6 @@ namespace Wallet.ViewModels
             }
         }
 
-        void ExtractAccountAddress(string qr)
-        {
-            if (string.IsNullOrWhiteSpace(qr)) return;
-
-            var fragments = qr.Split(new char[] { ':', '?' }, StringSplitOptions.RemoveEmptyEntries);
-
-            RecipientAddress = fragments.Length == 1
-                                        ? fragments[0]
-                                        : fragments[1];
-        }
-
         async void UpdateBalance()
         {
             userDialogs.ShowLoading("Refreshing balance");
@@ -95,6 +70,60 @@ namespace Wallet.ViewModels
                 BalanceInETH = await accountsManager.GetBalanceInETHAsync(accountsManager.DefaultAccountAddress);
             }));
             userDialogs.HideLoading();
+        }
+
+        ICommand _ShareCommand;
+        public ICommand ShareCommand
+        {
+            get { return (_ShareCommand = _ShareCommand ?? new Command<object>(ExecuteShareCommand, CanExecuteShareCommand)); }
+        }
+        bool CanExecuteShareCommand(object obj) => true;
+        void ExecuteShareCommand(object obj)
+        {
+            share.Share(new ShareMessage
+            {
+                Title = "My Ethereum Address",
+                Text = $"ethereum:{DefaultAccountAddress}"
+            });
+        }
+
+        ICommand _RefreshBalanceCommand;
+        public ICommand RefreshBalanceCommand
+        {
+            get { return (_RefreshBalanceCommand = _RefreshBalanceCommand ?? new Command<object>(ExecuteRefreshBalanceCommand, CanExecuteRefreshBalanceCommand)); }
+        }
+        bool CanExecuteRefreshBalanceCommand(object obj) => true;
+        void ExecuteRefreshBalanceCommand(object obj)
+        {
+            UpdateBalance();
+        }
+    }
+
+    partial class WalletViewModel
+    {
+        string _RecipientAddress;
+        public string RecipientAddress
+        {
+            get => _RecipientAddress;
+            set => SetProperty(ref _RecipientAddress, value);
+        }
+
+        decimal _SendingAmount;
+        public decimal SendingAmount
+        {
+            get => _SendingAmount;
+            set => SetProperty(ref _SendingAmount, value);
+        }
+
+        void ExtractAccountAddress(string qr)
+        {
+            if (string.IsNullOrWhiteSpace(qr)) return;
+
+            var fragments = qr.Split(new char[] { ':', '?' }, StringSplitOptions.RemoveEmptyEntries);
+
+            RecipientAddress = fragments.Length == 1
+                                        ? fragments[0]
+                                        : fragments[1];
         }
 
         ICommand _ScanQRCommand;
@@ -128,30 +157,19 @@ namespace Wallet.ViewModels
             UpdateBalance();
         }
 
-        ICommand _ShareCommand;
-        public ICommand ShareCommand
-        {
-            get { return (_ShareCommand = _ShareCommand ?? new Command<object>(ExecuteShareCommand, CanExecuteShareCommand)); }
-        }
-        bool CanExecuteShareCommand(object obj) => true;
-        void ExecuteShareCommand(object obj)
-        {
-            share.Share(new ShareMessage
-            {
-                Title = "My Ethereum Address",
-                Text = $"ethereum:{DefaultAccountAddress}"
-            });
-        }
+    }
 
-        ICommand _RefreshBalanceCommand;
-        public ICommand RefreshBalanceCommand
+    partial class WalletViewModel
+    {
+        ICommand _ViewHistoryCommand;
+        public ICommand ViewHistoryCommand
         {
-            get { return (_RefreshBalanceCommand = _RefreshBalanceCommand ?? new Command<object>(ExecuteRefreshBalanceCommand, CanExecuteRefreshBalanceCommand)); }
+            get { return (_ViewHistoryCommand = _ViewHistoryCommand ?? new Command<object>(ExecuteViewHistoryCommand, CanExecuteViewHistoryCommand)); }
         }
-        bool CanExecuteRefreshBalanceCommand(object obj) => true;
-        void ExecuteRefreshBalanceCommand(object obj)
+        bool CanExecuteViewHistoryCommand(object obj) => true;
+        async void ExecuteViewHistoryCommand(object obj)
         {
-            UpdateBalance();
+            await navigationService.NavigateAsync(NavigationKeys.WalletViewHistory);
         }
     }
 }

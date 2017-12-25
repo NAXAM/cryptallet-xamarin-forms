@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Wallet.Views.TransactionHistoryView"
+    xmlns:converters="clr-namespace:Wallet.Converters"
+    Title="Transaction History"
+    BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BooleanInversedConverter
+                x:Key="BooleanInversedConverter" />
+            <Color
+                x:Key="ColorPrimary">#3574FA</Color>
+            <Color
+                x:Key="ColorTextPrimary">#FFFFFF</Color>
+            <Color
+                x:Key="ColorTextAccent">#384951</Color>
+            <Color
+                x:Key="ColorTextSecondary">#B2B2B2</Color>
+            <x:Double
+                x:Key="FontSizeNormal">16</x:Double>
+            <x:Double
+                x:Key="FontSizeXlarge">26</x:Double>
+            <x:Double
+                x:Key="FontSizeSmall">14</x:Double>
+            <OnPlatform
+                x:Key="NumberPadItemSize"
+                x:TypeArguments="GridLength"
+                Android="48"
+                iOS="40">
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ListView
+        ItemsSource="{Binding Transactions}"
+        SeparatorColor="{StaticResource ColorTextSecondary}"
+        RowHeight="87">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid
+                        BackgroundColor="White"
+                        Padding="16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition
+                                Height="54" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            IsVisible="{Binding Inward}"
+                            Text="{Binding Sender}"
+                            TextColor="{StaticResource ColorPrimary}"
+                            FontSize="{StaticResource FontSizeNormal}" />
+                        <Label
+                            IsVisible="{Binding Inward, Converter={StaticResource BooleanInversedConverter}}"
+                            Text="{Binding Receiver}"
+                            TextColor="{StaticResource ColorTextAccent}"
+                            FontSize="{StaticResource FontSizeNormal}" />
+                        <Label
+                            IsVisible="{Binding Inward}"
+                            HorizontalTextAlignment="End"
+                            VerticalTextAlignment="End"
+                            Text="{Binding Amount, StringFormat='+{0:#,##0.00} NXT'}"
+                            TextColor="{StaticResource ColorTextAccent}"
+                            FontSize="{StaticResource FontSizeNormal}" />
+                        <Label
+                            IsVisible="{Binding Inward, Converter={StaticResource BooleanInversedConverter}}"
+                            HorizontalTextAlignment="End"
+                            VerticalTextAlignment="End"
+                            Text="{Binding Amount, StringFormat='-{0:#,##0.00} NXT'}"
+                            TextColor="Maroon"
+                            FontSize="{StaticResource FontSizeNormal}" />
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

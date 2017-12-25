@@ -44,6 +44,9 @@ namespace Wallet.Forms.Bootstraps.Services
                 case Wallet.NavigationKeys.ScanQRCode:
                     uri = Routes.QRCodeScanner;
                     break;
+                case Wallet.NavigationKeys.WalletViewHistory:
+                    uri = Routes.WalletViewHistory;
+                    break;
 
                 default:
                     await NavigateAsync(name, parameters);

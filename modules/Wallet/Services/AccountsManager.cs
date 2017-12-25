@@ -5,6 +5,10 @@ using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
 using Nethereum.StandardTokenEIP20.Events.DTO;
 using Wallet.Core;
+using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Hex.HexConvertors.Extensions;
+using Wallet.Models;
+using System.Linq;
 
 namespace Wallet.Services
 {
@@ -17,7 +21,7 @@ namespace Wallet.Services
         Task<decimal> GetTokensAsync(string accountAddress);
         Task<decimal> GetBalanceInETHAsync(string accountAddress);
 
-        Task GetTransactionsAsync(bool sent = false);
+        Task<TransactionModel[]> GetTransactionsAsync(bool sent = false);
 
         Task<string> TransferAsync(string from, string to, decimal amount);
     }
@@ -63,26 +67,38 @@ namespace Wallet.Services
             return await standardTokenService.TransferAsync(from, to, amount);
         }
 
-        public Task GetTransactionsAsync(bool sent = false)
+        public Task<TransactionModel[]> GetTransactionsAsync(bool sent = false)
         {
             return Task.Run(async delegate
             {
                 var transferEvent = standardTokenService.GetTransferEvent();
 
-                var filter = false == sent
-                    ? await transferEvent.CreateFilterAsync(DefaultAccountAddress)
-                    : await transferEvent.CreateFilterAsync<string, object, string>(null, null, DefaultAccountAddress);
+                var paddedAccountAddress = DefaultAccountAddress.RemoveHexPrefix()
+                                                 .PadLeft(64, '0')
+                                                 .EnsureHexPrefix();
 
-                var changes = transferEvent.GetFilterChanges<Transfer>(filter);
+                var filter = transferEvent.CreateFilterInput(
+                    new object[] { sent ? paddedAccountAddress : null },
+                    new object[] { sent ? null : paddedAccountAddress },
+                    BlockParameter.CreateEarliest(),
+                    BlockParameter.CreateLatest());
 
-                return changes;
+                var changes = await transferEvent.GetAllChanges<Transfer>(filter);
+
+                return changes.Select(x => new TransactionModel
+                {
+                    Sender = x.Event.AddressFrom,
+                    Receiver = x.Event.AddressTo,
+                    Amount = (decimal)x.Event.Value,
+                    Inward = false == sent
+                }).ToArray();
             });
         }
 
         void Initialize()
         {
-            //var client = new RpcClient(new Uri("http://127.0.0.1:9545"));//iOS
-            //var client = new RpcClient(new Uri("http://10.0.2.2:9545"));//ANDROID
+            //var client = new RpcClient(new Uri("http://192.168.12.154:8545"));//iOS
+            //var client = new RpcClient(new Uri("http://10.0.2.2:8545"));//ANDROID
             var client = new RpcClient(new Uri("https://rinkeby.infura.io/O3CUsRfVYECJi12W8fk3"));
 
             web3 = new Web3(DefaultAccount, client);

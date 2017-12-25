@@ -122,6 +122,26 @@
             </Label>
         </Grid>
         <Grid
+            HorizontalOptions="End"
+            VerticalOptions="End"
+            BackgroundColor="{StaticResource ColorTextAccent}"
+            Margin="16,8"
+            Padding="16,8">
+            <Label
+                Text="History"
+                TextColor="White"
+                HorizontalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding ViewHistoryCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding ViewHistoryCommand}" />
+            </Grid.GestureRecognizers>
+        </Grid>
+        <Grid
             Grid.Row="1"
             Padding="24, 48"
             RowSpacing="8"
