@@ -9,6 +9,8 @@
     x:Class="Wallet.Views.WalletView">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <converters:BooleanInversedConverter
+                x:Key="BooleanInversedConverter" />
             <converters:NXTtoUSDConverter
                 x:Key="NXTtoUSDConverter" />
             <Color
@@ -142,6 +144,7 @@
             </Grid.GestureRecognizers>
         </Grid>
         <Grid
+            IsVisible="{Binding Sendable}"
             Grid.Row="1"
             Padding="24, 48"
             RowSpacing="8"
@@ -189,7 +192,16 @@
                 TextColor="{StaticResource ColorTextAccent}"
                 FontSize="{StaticResource FontSizeNormal}" />
         </Grid>
+        <Label
+            IsVisible="{Binding Sendable, Converter={StaticResource BooleanInversedConverter}}"
+            Grid.Row="1"
+            Margin="24,40"
+            Text="If you have at least 1 NXT and 0.01 ETH, you will be able to send your NXT to others."
+            HorizontalTextAlignment="Center"
+            TextColor="Maroon"
+            FontSize="{StaticResource FontSizeLarge}" />
         <ContentView
+            IsVisible="{Binding Sendable}"
             Grid.Row="1"
             Padding="16"
             VerticalOptions="End"

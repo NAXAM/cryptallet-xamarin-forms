@@ -26,6 +26,13 @@ namespace Wallet.ViewModels
             set => SetProperty(ref _BalanceInETH, value);
         }
 
+        bool _Sendable;
+        public bool Sendable
+        {
+            get => _Sendable;
+            set => SetProperty(ref _Sendable, value);
+        }
+
         public string DefaultAccountAddress => accountsManager.DefaultAccountAddress;
 
         readonly IAccountsManager accountsManager;
@@ -61,6 +68,7 @@ namespace Wallet.ViewModels
 
         async void UpdateBalance()
         {
+            await Task.Delay(100);
             userDialogs.ShowLoading("Refreshing balance");
             await Task.WhenAll(Task.Run(async delegate
             {
@@ -69,6 +77,9 @@ namespace Wallet.ViewModels
             {
                 BalanceInETH = await accountsManager.GetBalanceInETHAsync(accountsManager.DefaultAccountAddress);
             }));
+
+            Sendable = Balance > 0 && BalanceInETH >= 0.01m;
+
             userDialogs.HideLoading();
         }
 
