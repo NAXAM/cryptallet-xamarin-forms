@@ -10,6 +10,8 @@
         <ResourceDictionary>
             <converters:BooleanInversedConverter
                 x:Key="BooleanInversedConverter" />
+            <converters:TimeAgoConverter
+                x:Key="TimeAgoConverter" />
             <Color
                 x:Key="ColorPrimary">#3574FA</Color>
             <Color
@@ -32,47 +34,61 @@
             </OnPlatform>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ListView
-        ItemsSource="{Binding Transactions}"
-        SeparatorColor="{StaticResource ColorTextSecondary}"
-        RowHeight="87">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <Grid
-                        BackgroundColor="White"
-                        Padding="16">
-                        <Grid.RowDefinitions>
-                            <RowDefinition
-                                Height="54" />
-                        </Grid.RowDefinitions>
-                        <Label
-                            IsVisible="{Binding Inward}"
-                            Text="{Binding Sender}"
-                            TextColor="{StaticResource ColorPrimary}"
-                            FontSize="{StaticResource FontSizeNormal}" />
-                        <Label
-                            IsVisible="{Binding Inward, Converter={StaticResource BooleanInversedConverter}}"
-                            Text="{Binding Receiver}"
-                            TextColor="{StaticResource ColorTextAccent}"
-                            FontSize="{StaticResource FontSizeNormal}" />
-                        <Label
-                            IsVisible="{Binding Inward}"
-                            HorizontalTextAlignment="End"
-                            VerticalTextAlignment="End"
-                            Text="{Binding Amount, StringFormat='+{0:#,##0.00} NXT'}"
-                            TextColor="{StaticResource ColorTextAccent}"
-                            FontSize="{StaticResource FontSizeNormal}" />
-                        <Label
-                            IsVisible="{Binding Inward, Converter={StaticResource BooleanInversedConverter}}"
-                            HorizontalTextAlignment="End"
-                            VerticalTextAlignment="End"
-                            Text="{Binding Amount, StringFormat='-{0:#,##0.00} NXT'}"
-                            TextColor="Maroon"
-                            FontSize="{StaticResource FontSizeNormal}" />
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+    <Grid>
+        <ListView
+            ItemsSource="{Binding Transactions}"
+            SeparatorColor="{StaticResource ColorTextSecondary}"
+            RowHeight="87">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid
+                            BackgroundColor="White"
+                            Padding="16">
+                            <Grid.RowDefinitions>
+                                <RowDefinition
+                                    Height="54" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                IsVisible="{Binding Inward}"
+                                Text="{Binding Sender}"
+                                TextColor="{StaticResource ColorPrimary}"
+                                FontSize="{StaticResource FontSizeNormal}" />
+                            <Label
+                                IsVisible="{Binding Inward, Converter={StaticResource BooleanInversedConverter}}"
+                                Text="{Binding Receiver}"
+                                TextColor="{StaticResource ColorTextAccent}"
+                                FontSize="{StaticResource FontSizeNormal}" />
+                            <Label
+                                IsVisible="{Binding Inward}"
+                                HorizontalTextAlignment="End"
+                                VerticalTextAlignment="End"
+                                Text="{Binding Amount, StringFormat='+{0:#,##0.00} NXT'}"
+                                TextColor="{StaticResource ColorTextAccent}"
+                                FontSize="{StaticResource FontSizeNormal}" />
+                            <Label
+                                IsVisible="{Binding Inward, Converter={StaticResource BooleanInversedConverter}}"
+                                HorizontalTextAlignment="End"
+                                VerticalTextAlignment="End"
+                                Text="{Binding Amount, StringFormat='-{0:#,##0.00} NXT'}"
+                                TextColor="Maroon"
+                                FontSize="{StaticResource FontSizeNormal}" />
+                            <Label
+                                VerticalTextAlignment="End"
+                                Text="{Binding Timestamp, Converter={StaticResource TimeAgoConverter}}"
+                                TextColor="{StaticResource ColorTextAccent}"
+                                FontSize="{StaticResource FontSizeSmall}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ActivityIndicator
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Color="{StaticResource ColorPrimary}"
+            IsRunning="{Binding IsFetching}"
+            IsVisible="{Binding IsFetching}"
+            />
+    </Grid>
 </ContentPage>

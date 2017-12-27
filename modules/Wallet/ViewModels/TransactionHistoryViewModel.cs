@@ -8,6 +8,13 @@ namespace Wallet.ViewModels
 {
     public class TransactionHistoryViewModel : ViewModelBase
     {
+        bool _IsFetching;
+        public bool IsFetching
+        {
+            get => _IsFetching;
+            set => SetProperty(ref _IsFetching, value);
+        }
+
         TransactionModel[] _Transactions;
         public TransactionModel[] Transactions
         {
@@ -30,10 +37,14 @@ namespace Wallet.ViewModels
         }
 
         async void LoadData() {
+            IsFetching = true;
+
             var receiving = await accountsManager.GetTransactionsAsync();
             var sending = await accountsManager.GetTransactionsAsync(true);
 
-            Transactions = receiving.Union(sending).ToArray();
+            Transactions = receiving.Union(sending).OrderByDescending(x => x.Timestamp).ToArray();
+
+            IsFetching = false;
         }
     }
 }

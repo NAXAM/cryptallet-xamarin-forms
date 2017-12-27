@@ -1,5 +1,4 @@
-﻿using System;
-namespace Wallet.Models
+﻿namespace Wallet.Models
 {
     public class TransactionModel
     {
@@ -10,5 +9,7 @@ namespace Wallet.Models
         public string Receiver { get; set; }
 
         public decimal Amount { get; set; }
+
+        public long Timestamp { get; set; }
     }
 }

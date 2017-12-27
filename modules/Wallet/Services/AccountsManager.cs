@@ -9,6 +9,8 @@ using Nethereum.RPC.Eth.DTOs;
 using Nethereum.Hex.HexConvertors.Extensions;
 using Wallet.Models;
 using System.Linq;
+using Xamarin.Forms.Internals;
+using Nethereum.Contracts;
 
 namespace Wallet.Services
 {
@@ -85,13 +87,25 @@ namespace Wallet.Services
 
                 var changes = await transferEvent.GetAllChanges<Transfer>(filter);
 
-                return changes.Select(x => new TransactionModel
+                var timestampTasks = changes.Select(x => Task.Factory.StartNew(async (state) =>
                 {
-                    Sender = x.Event.AddressFrom,
-                    Receiver = x.Event.AddressTo,
-                    Amount = (decimal)x.Event.Value,
-                    Inward = false == sent
-                }).ToArray();
+                    var log = (EventLog<Transfer>)state;
+
+                    var block = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(log.Log.BlockNumber);
+
+                    return new TransactionModel
+                    {
+                        Sender = log.Event.AddressFrom,
+                        Receiver = log.Event.AddressTo,
+                        Amount = (decimal)log.Event.Value,
+                        Inward = false == sent,
+                        Timestamp = (long)block.Timestamp.Value
+                    };
+                }, x));
+
+                return await Task.WhenAll(timestampTasks).ContinueWith(tt => {
+                    return tt.Result.Select(x => x.Result).ToArray();
+                });
             });
         }
 
