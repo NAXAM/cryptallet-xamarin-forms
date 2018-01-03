@@ -65,6 +65,7 @@ namespace Wallet.ViewModels
                 return;
             }
 
+            await controller.SaveWalletAsync();
             await navigator.NavigateAsync(NavigationKeys.ConfirmPassphraseOk);
         }
     }

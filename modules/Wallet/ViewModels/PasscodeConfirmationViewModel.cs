@@ -40,7 +40,7 @@ namespace Wallet.ViewModels
 
                 return;
             }
-            await controller.CreateWallet();
+            await controller.CreateWalletAsync();
             await navigator.NavigateAsync(NavigationKeys.ConnfirmPasscodeOk);
         }
     }

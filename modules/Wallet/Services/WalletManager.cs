@@ -11,7 +11,9 @@ namespace Wallet.Services
     {
         Wallet Wallet { get; }
 
-        Task CreateWalletAsync(string password);
+        Task CreateWalletAsync();
+
+        Task SaveWalletAsync(string password);
 
         Task<bool> UnlockWalletAsync(string password, bool bypass = false);
 
@@ -34,11 +36,19 @@ namespace Wallet.Services
             this.secureStorgage = secureStorgage;
         }
 
-        public Task CreateWalletAsync(string password)
+        public Task CreateWalletAsync()
         {
             return Task.Run(delegate
             {
                 wallet = new Wallet(Wordlist.English, WordCount.Twelve, SEED_PASSWORD);
+            });
+        }
+
+        public Task SaveWalletAsync(string password)
+        {
+            return Task.Run(delegate
+            {
+                if (wallet == null) return;
 
                 StoreCredentials(password);
             });

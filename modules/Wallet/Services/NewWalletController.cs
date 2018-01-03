@@ -12,9 +12,14 @@ namespace Wallet.Services
             this.walletManager = walletManager;
         }
 
-        public async Task CreateWallet()
+        public async Task CreateWalletAsync()
         {
-            await walletManager.CreateWalletAsync(passcode);
+            await walletManager.CreateWalletAsync();
+        }
+
+        public async Task SaveWalletAsync()
+        {
+            await walletManager.SaveWalletAsync(passcode);
         }
 
         public string[] GetSeedWords()
