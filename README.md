@@ -14,7 +14,7 @@ We specialize in developing mobile applications using Xamarin and native technol
 ## Screenshots
 | Unlock        | Home           | History  |
 | ------------- |----------------| ---------|
-|<img src="./art/unlock.png" alt="Unlock"/>| <img src="./art/home.png" alt="Home"/> | <img src="./art/history.png" alt="History"/> |
+|<img src="./screenshots/unlock.png" alt="Unlock"/>| <img src="./screenshots/home.png" alt="Home"/> | <img src="./screenshots/history.png" alt="History"/> |
 
 ## License
 
