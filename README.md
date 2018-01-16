@@ -16,13 +16,9 @@ We specialize in developing mobile applications using Xamarin and native technol
 | ------------- |----------------| ---------|
 |<img src="./art/unlock.png" alt="Unlock"/>| <img src="./art/home.png" alt="Home"/> | <img src="./art/history.png" alt="History"/> |
 
-## Usage
-
-Plz follow the official guide [here](https://www.mapbox.com/ios-sdk/).
-
 ## License
 
-Cryptallet Xamarin.Forms application is released under the Apache License, Version 2.0.
+Cryptallet application is released under the Apache License, Version 2.0.
 See [LICENSE](./LICENSE) for details.
 
 # Get our showcases on AppStore/PlayStore
@@ -40,5 +36,5 @@ Contact us if interested.
 <img src="https://github.com/NAXAM/naxam.github.io/blob/master/assets/img/hire_button.png" height="34"></a> <br>
 <br>
 
-Follow us for the latest updates<br>[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=https://github.com/NAXAM/mapbox-ios-binding)
+Follow us for the latest updates<br>[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=https://github.com/NAXAM/cryptallet-xamarin-forms)
 [![Twitter Follow](https://img.shields.io/twitter/follow/naxamco.svg?style=social)](https://twitter.com/naxamco)
