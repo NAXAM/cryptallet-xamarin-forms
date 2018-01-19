@@ -16,6 +16,21 @@ We specialize in developing mobile applications using Xamarin and native technol
 | ------------- |----------------| ---------|
 |<img src="./screenshots/unlock.png" alt="Unlock"/>| <img src="./screenshots/home.png" alt="Home"/> | <img src="./screenshots/history.png" alt="History"/> |
 
+## How to folk
+Currently, the app is worked with my own created ERC20 contract. You might need to change the contract address to your desired one in order to test out the app.
+
+Inside *AccountsManager* class, change line 48.
+```
+const string CONTRACT_ADDRESS = "{YOUR_SMART_CONTRACT_ADDRESS}";
+```
+
+You will also need to point out to your appropriate Ethereum network of your choice.
+
+Inside *AccountsManager* class, change line 131
+```
+var client = new RpcClient(new Uri("{YOUR_ETHEREUM_NETWORK}"));
+```
+
 ## License
 
 Cryptallet application is released under the Apache License, Version 2.0.
