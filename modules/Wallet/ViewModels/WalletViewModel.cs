@@ -68,7 +68,7 @@ namespace Wallet.ViewModels
             this.userDialogs = userDialogs;
         }
 
-        public override void OnNavigatedTo(NavigationParameters parameters)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             if (parameters.ContainsKey("qr_code"))
             {

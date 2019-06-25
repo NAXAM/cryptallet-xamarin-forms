@@ -18,6 +18,7 @@ using Wallet.Core;
 using Wallet.Services;
 using Wallet.Models;
 using System.Linq;
+using Prism.Navigation;
 
 namespace Wallet.ViewModels
 {
@@ -44,7 +45,7 @@ namespace Wallet.ViewModels
             this.accountsManager = accountsManager;
         }
 
-        public override void OnNavigatedTo(Prism.Navigation.NavigationParameters parameters)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
 

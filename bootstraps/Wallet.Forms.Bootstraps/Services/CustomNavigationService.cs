@@ -12,13 +12,14 @@
  *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
- */ 
+ */
 using System;
 using Prism.Navigation;
 using Prism.Behaviors;
 using Prism.Common;
 using Prism.Ioc;
 using Prism.Logging;
+using System.Threading.Tasks;
 
 namespace Wallet.Forms.Bootstraps.Services
 {
@@ -28,7 +29,7 @@ namespace Wallet.Forms.Bootstraps.Services
         {
         }
 
-        public async override System.Threading.Tasks.Task NavigateAsync(string name, NavigationParameters parameters)
+        public async override Task<INavigationResult> NavigateAsync(string name, INavigationParameters parameters)
         {
             Uri uri = null;
 
@@ -64,11 +65,10 @@ namespace Wallet.Forms.Bootstraps.Services
                     break;
 
                 default:
-                    await NavigateAsync(name, parameters);
-                    return;
+                    return await NavigateAsync(name, parameters).ConfigureAwait(false);
             }
 
-            await NavigateAsync(uri, parameters);
+            return await NavigateAsync(uri, parameters).ConfigureAwait(false);
         }
     }
 }

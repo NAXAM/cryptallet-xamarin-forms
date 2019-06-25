@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
-    <PackageReference Include="sameerIOTApps.Plugin.SecureStorage" Version="2.0.0" />
-    <PackageReference Include="Prism.DryIoc.Forms" Version="7.0.0.362" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.496342-pre2" />
+    <PackageReference Include="sameerIOTApps.Plugin.SecureStorage" Version="2.5.0" />
+    <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1347-pre" />
     <PackageReference Include="Plugin.Share" Version="7.1.1" />
-    <PackageReference Include="Acr.UserDialogs" Version="7.0.0" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.4" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\modules\Wallet\Wallet.csproj" />

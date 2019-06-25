@@ -26,6 +26,8 @@ using Wallet.Models;
 using System.Linq;
 using Xamarin.Forms.Internals;
 using Nethereum.Contracts;
+using Nethereum.StandardTokenEIP20;
+using Nethereum.StandardTokenEIP20.ContractDefinition;
 
 namespace Wallet.Services
 {
@@ -52,7 +54,7 @@ namespace Wallet.Services
         Account DefaultAccount => walletManager.Wallet?.GetAccount(0);
 
         readonly IWalletManager walletManager;
-        WorkaroundStandardTokenService standardTokenService;
+        StandardTokenService standardTokenService;
         Web3 web3;
 
         public AccountsManager(IWalletManager walletManager)
@@ -69,7 +71,9 @@ namespace Wallet.Services
 
         public async Task<decimal> GetTokensAsync(string accountAddress)
         {
-            return await standardTokenService.GetBalanceOfAsync<int>(accountAddress);
+            var wei = await standardTokenService.BalanceOfQueryAsync(accountAddress);
+
+            return (decimal)wei;
         }
 
         public async Task<decimal> GetBalanceInETHAsync(string accountAddress)
@@ -81,7 +85,9 @@ namespace Wallet.Services
 
         public async Task<string> TransferAsync(string from, string to, decimal amount)
         {
-            return await standardTokenService.TransferAsync(from, to, amount);
+            var receipt = await standardTokenService.TransferFromRequestAndWaitForReceiptAsync(from, to, new System.Numerics.BigInteger((int)amount));
+
+            return receipt.TransactionHash;
         }
 
         public Task<TransactionModel[]> GetTransactionsAsync(bool sent = false)
@@ -100,18 +106,18 @@ namespace Wallet.Services
                     BlockParameter.CreateEarliest(),
                     BlockParameter.CreateLatest());
 
-                var changes = await transferEvent.GetAllChanges<Transfer>(filter);
+                var changes = await transferEvent.GetAllChanges(filter);
 
                 var timestampTasks = changes.Select(x => Task.Factory.StartNew(async (state) =>
                 {
-                    var log = (EventLog<Transfer>)state;
+                    var log = (EventLog<TransferEventDTO>)state;
 
                     var block = await web3.Eth.Blocks.GetBlockWithTransactionsByNumber.SendRequestAsync(log.Log.BlockNumber);
 
                     return new TransactionModel
                     {
-                        Sender = log.Event.AddressFrom,
-                        Receiver = log.Event.AddressTo,
+                        Sender = log.Event.From,
+                        Receiver = log.Event.To,
                         Amount = (decimal)log.Event.Value,
                         Inward = false == sent,
                         Timestamp = (long)block.Timestamp.Value
@@ -131,7 +137,7 @@ namespace Wallet.Services
             var client = new RpcClient(new Uri("https://rinkeby.infura.io/O3CUsRfVYECJi12W8fk3"));
 
             web3 = new Web3(DefaultAccount, client);
-            standardTokenService = new WorkaroundStandardTokenService(web3, CONTRACT_ADDRESS);
+            standardTokenService = new StandardTokenService(web3, CONTRACT_ADDRESS);
         }
     }
 

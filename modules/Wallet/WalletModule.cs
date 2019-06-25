@@ -24,11 +24,7 @@ namespace Wallet
 {
     public class WalletModule : IModule
     {
-        public void Initialize()
-        {
-        }
-
-        public void OnInitialized()
+        public void OnInitialized(IContainerProvider containerProvider)
         {
         }
 

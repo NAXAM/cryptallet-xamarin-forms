@@ -22,13 +22,12 @@ namespace Wallet.Droid
             PreserveCustomRenderers();
 
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            SecureStorageImplementation.StoragePassword = "$AES-128-CBC$FRz75wk/LvdAyOMyY9Wibw==$GNzheuuNsOkkBHG3hFSpA37UAQ1TDWQH0ncZcR2+7r4=";
             LoadApplication(new WalletApplication());
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
-            ZXing.Net.Mobile.Forms.Android.PermissionsHandler.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            ZXing.Net.Mobile.Android.PermissionsHandler.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
         void PreserveCustomRenderers()
