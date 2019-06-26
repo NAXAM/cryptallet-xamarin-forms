@@ -79,7 +79,7 @@ namespace Wallet.ViewModels
         bool CanExecuteCreateCommand(object obj) => true;
         async void ExecuteCreateCommand(object obj)
         {
-            await navigator.NavigateAsync(NavigationKeys.CreateWallet);
+            var result = await navigator.NavigateAsync(NavigationKeys.CreateWallet);
         }
 
         ICommand _RecoverCommand;

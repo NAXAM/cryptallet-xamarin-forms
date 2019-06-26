@@ -48,7 +48,10 @@ namespace Wallet.Forms.Bootstraps
         /// Create <see cref="Rules" /> to alter behavior of <see cref="IContainer" />
         /// </summary>
         /// <returns>An instance of <see cref="Rules" /></returns>
-        protected virtual Rules CreateContainerRules() => Rules.Default.WithAutoConcreteTypeResolution();
+        protected virtual Rules CreateContainerRules() => Rules.Default.WithAutoConcreteTypeResolution()
+                                                                       .With(Made.Of(FactoryMethod.ConstructorWithResolvableArguments))
+                                                                       .WithoutFastExpressionCompiler()
+                                                                       .WithDefaultIfAlreadyRegistered(IfAlreadyRegistered.Replace);
 
         /// <summary>
         /// Configures the Container.
@@ -57,7 +60,7 @@ namespace Wallet.Forms.Bootstraps
         protected override void RegisterRequiredTypes(IContainerRegistry containerRegistry)
         {
             base.RegisterRequiredTypes(containerRegistry);
-            Container.GetContainer().Register<INavigationService, CustomNavigationService>();
+            Container.GetContainer().Register<INavigationService, CustomNavigationService>(serviceKey: PrismApplicationBase.NavigationServiceName);
             Container.GetContainer().Register<INavigationService>(
                 made: Made.Of(() => SetPage(Arg.Of<INavigationService>(), Arg.Of<Page>())),
                 setup: Setup.Decorator);
@@ -116,5 +119,13 @@ namespace Wallet.Forms.Bootstraps
         public static readonly Uri WalletRecover = new Uri($"{nameof(RecoverView)}", UriKind.Relative);
         public static readonly Uri QRCodeScanner = new Uri($"{nameof(ScanQRCodeView)}", UriKind.Relative);
         internal static readonly Uri WalletViewHistory = new Uri($"{nameof(TransactionHistoryView)}", UriKind.Relative);
+    }
+
+    public class NavigationPage : Xamarin.Forms.NavigationPage
+    {
+        public NavigationPage() : base()
+        {
+
+        }
     }
 }

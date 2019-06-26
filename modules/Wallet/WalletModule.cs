@@ -41,7 +41,7 @@ namespace Wallet
             containerRegistry.RegisterForNavigation<PasscodeView, PasscodeViewModel>();
             containerRegistry.RegisterForNavigation<PasscodeConfirmationView, PasscodeConfirmationViewModel>();
             containerRegistry.RegisterForNavigation<PassphraseView, PassphraseViewModel>();
-            containerRegistry.RegisterForNavigation<PassphraseConfirmationView, PasscodeConfirmationViewModel>();
+            containerRegistry.RegisterForNavigation<PassphraseConfirmationView, PassphraseConfirmationViewModel>();
             containerRegistry.RegisterForNavigation<WalletView, WalletViewModel>();
             containerRegistry.RegisterForNavigation<RecoverView, RecoverViewModel>();
             containerRegistry.RegisterForNavigation<TransactionHistoryView, TransactionHistoryViewModel>();
